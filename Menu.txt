@@ -1,0 +1,16 @@
+doAn,Banh mi kep,16000
+Mon kho
+doAn,Bun Bo Hue,30000
+Mon nuoc
+thucUong,Tra sua tran chau,22000
+M
+thucUong,Tra tac,20000
+L
+thucUong,Ep oi,20000
+M
+thucUong,Matcha latte,30000
+M
+doAn,Mi tron Indomie,17000
+Mon kho
+doAn,Bun Rieu,30000
+Mon nuoc

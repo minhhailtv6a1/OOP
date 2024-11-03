@@ -1,36 +1,26 @@
-public class doAn extends sanPham {
-    private String nguyenLieu;
-    private String loaiDoAn;
 
-    public doAn(){
-        super();
-        nguyenLieu="";
-        loaiDoAn="";
+public class doAn extends sanPham {
+    private String loai; // Loại món ăn
+
+    // Hàm thiết lập
+    public doAn(String ten, String gia, String loai) {
+        super(ten, gia); // Gọi hàm thiết lập của lớp cha
+        this.loai = loai; // Thiết lập loại món ăn
     }
 
-    public doAn(String maSP, String tenSP, double giaSP,String nguyenLieu,String loaiDoAn){
-        super(maSP, tenSP, giaSP);
-        this.nguyenLieu=nguyenLieu;
-        this.loaiDoAn=loaiDoAn;
+    // Phương thức set
+    public void setLoai(String loai) {
+        this.loai = loai; // Thiết lập loại món ăn
+    }
+
+    // Phương thức get
+    public String getLoai() {
+        return loai; // Trả về loại món ăn
     }
 
     @Override
-    public void xuat() {
-        // TODO Auto-generated method stub
-        super.xuat();
-        System.out.println("Nguyen lieu: " + nguyenLieu);
-        System.out.println("Loai do an: " + loaiDoAn);
+    public void hienThiThongTin() {
+        // Hiển thị thông tin món ăn
+        System.out.println("Do An - ID: " + getId() + ", Ten: " + getTen() + ", Gia: " + getGia() + ", Loai: " + loai);
     }
-    public void setLoaiDoAn(String loaiDoAn) {
-        this.loaiDoAn = loaiDoAn;
-    }
-    public void setNguyenLieu(String nguyenLieu) {
-        this.nguyenLieu = nguyenLieu;
-    }
-    public String getLoaiDoAn() {
-        return loaiDoAn;
-    }
-    public String getNguyenLieu() {
-        return nguyenLieu;
-    }    
 }

@@ -1,42 +1,27 @@
+// thucUong.java
 public class thucUong extends sanPham {
-    private String size;
-    private boolean coDa;
-    private float nongDoDuong;
-    public thucUong(){
-        super();
-        size="";
-        coDa=true;
-        nongDoDuong=0;
+    private String size; // Kích thước đồ uống
+
+    // Hàm thiết lập
+    public thucUong(String ten, String gia, String size) {
+        super(ten, gia); // Gọi hàm thiết lập của lớp cha
+        this.size = size; // Thiết lập kích thước
     }
-    public thucUong(String maSP, String tenSP, double giaSP,String size,boolean coDa, float nongDoDuong) {
-        super(maSP, tenSP, giaSP);
-        this.size=size;
-        this.coDa=coDa;
-        this.nongDoDuong=nongDoDuong;
+
+    // Phương thức set
+    public void setSize(String size) {
+        this.size = size; // Thiết lập kích thước đồ uống
+    }
+
+    // Phương thức get
+    public String getSize() {
+        return size; // Trả về kích thước đồ uống
     }
 
     @Override
-    public void xuat() {
-        // TODO Auto-generated method stub
-        super.xuat();
-        System.out.println("Size: " + this.size);
-        String ice = this.coDa==true?"co":"khong";
-        System.out.println("Co da: " + ice);
-    }
-
-    public void setCoDa(boolean coDa) {
-        this.coDa = coDa;
-    }
-    public void setNongDoDuong(float nongDoDuong) {
-        this.nongDoDuong = nongDoDuong;
-    }
-    public void setSize(String size) {
-        this.size = size;
-    }
-    public String getSize() {
-        return size;
-    }
-    public float getNongDoDuong() {
-        return nongDoDuong;
+    public void hienThiThongTin() {
+        // Hiển thị thông tin đồ uống
+        System.out.println("Thuc Uong - ID: " + getId() + ", Ten: " + getTen() + ", Gia: " + getGia() + ", Size: " + size);
     }
 }
+

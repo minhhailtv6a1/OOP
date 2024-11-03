@@ -1,54 +1,40 @@
-import java.util.Scanner;
-public class sanPham {
-    private String maSP;
-    private String tenSP;
-    private double giaSP;
 
-    public sanPham(){
-        maSP="";
-        tenSP="";
-        giaSP=0;
-    }
+abstract class sanPham {
+    private static int count = 0; // Biến đếm số lượng sản phẩm
+    private int id; // ID sản phẩm
+    private String ten; // Tên sản phẩm
+    private String gia; // Giá sản phẩm
 
-    public sanPham(String maSP,String tenSP,double giaSP){
-        this.maSP=maSP;
-        this.tenSP=tenSP;
-        this.giaSP=giaSP;
+    // Hàm thiết lập
+    public sanPham(String ten, String gia) {
+        this.ten = ten;
+        this.gia = gia;
+        this.id = ++count; // Tăng id mỗi khi có sản phẩm mới
     }
 
-    public void nhap(){
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Ma san pham: ");
-        this.maSP=sc.nextLine();
-        System.out.print("Ten san pham: ");
-        this.tenSP=sc.nextLine();
-        System.out.print("Gia san pham: ");
-        this.giaSP=sc.nextDouble();
-        sc.nextLine();
+    // Phương thức set
+    public void setTen(String ten) {
+        this.ten = ten; // Thiết lập tên sản phẩm
     }
 
-    public void xuat(){
-        System.out.println("Ma san pham: " + this.maSP);
-        System.out.println("Ten san pham: " + this.tenSP);
-        System.out.println("Gia san pham: " + this.giaSP);
+    public void setGia(String gia) {
+        this.gia = gia; // Thiết lập giá sản phẩm
     }
 
-    public void setGiaSP(double giaSP) {
-        this.giaSP = giaSP;
+
+    // Phương thức get
+    public int getId() {
+        return id; // Trả về ID sản phẩm
     }
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+
+    public String getTen() {
+        return ten; // Trả về tên sản phẩm
     }
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+
+    public String getGia() {
+        return gia; // Trả về giá sản phẩm
     }
-    public double getGiaSP() {
-        return giaSP;
-    }
-    public String getMaSP() {
-        return maSP;
-    }
-    public String getTenSP() {
-        return tenSP;
-    }
+
+    // Phương thức trừu tượng để hiển thị thông tin sản phẩm
+    public abstract void hienThiThongTin();
 }
