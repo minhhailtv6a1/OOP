@@ -200,14 +200,12 @@ public class DS_NV {
 
     public void ghifile(){
         try{
-            System.out.println("--------------------------------");
-            System.out.println("\tLUU DANH SACH NHAN VIEN");
             FileWriter f = new FileWriter("nhanVien.txt");
-            String line = nv.size() + "\n";
+            String line = "";
             for(int i=0;i<n;i++){
                 nhanVien  tmp = nv.get(i);
-                line += tmp.getMaNhanVien() + ";"  + tmp.getHoTen() + ";" + tmp.getNamSinh() + ";" + tmp.getGioiTinh() + ";";
-                line += tmp.getSoDienThoai() + ";" + tmp.getViTri() + ";" + tmp.getCaLam() + ";" + tmp.getSoGio() + ";";
+                line += tmp.getMaNhanVien() + ","  + tmp.getHoTen() + "," + tmp.getNamSinh() + "," + tmp.getGioiTinh() + ",";
+                line += tmp.getSoDienThoai() + "," + tmp.getViTri() + "," + tmp.getCaLam() + "," + tmp.getSoGio() + ",";
                 line += (int)tmp.getLuongCoBan() + "\n";
             }
             f.write(line);
@@ -219,17 +217,14 @@ public class DS_NV {
 
     public void docfile(){
         try {
-            System.out.println("--------------------------------------");
-            System.out.println("\tTAI DANH SACH NHAN VIEN");
             BufferedReader f = new BufferedReader( new FileReader("nhanVien.txt"));
-            String line = f.readLine();
-            n = Integer.parseInt(line);
+            String line = "";
             // System.out.println(n);
             nv.clear();
             while(true){
                 line = f.readLine();
                 if(line==null) break;
-                String []a = line.split(";");
+                String []a = line.split(",");
                 nhanVien tmp = new nhanVien();
                 // for(int i = 0; i<a.length;i++){
                 //     System.out.println(a[i]);
@@ -247,6 +242,7 @@ public class DS_NV {
                 // tmp.xuat();
                 nv.add(tmp);
             }
+            this.n=nv.size();
         } catch (Exception e) {
             System.out.println(e);
         }

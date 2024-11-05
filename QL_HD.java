@@ -3,6 +3,7 @@ public class QL_HD {
     DS_HD ds_hd=new DS_HD();
 
     public void menuHD(){
+        ds_hd.docfile();
         Scanner sc=new Scanner(System.in);
         while (true) {
             System.out.println("--------------------------------");

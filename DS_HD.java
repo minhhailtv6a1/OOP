@@ -123,14 +123,14 @@ public class DS_HD {
     public void ghifile(){
         try {
             FileWriter fw = new FileWriter("hoaDon.txt");
-            String line = hd.size() + "\n";
+            String line = "";
             for(int i=0;i<n;i++){
                 if(hd.get(i) instanceof hoaDonKhach){
                     hoaDonKhach tmp=(hoaDonKhach)hd.get(i);
-                    line += tmp.getMaHoaDon() + ";" + tmp.getNgay().get(Calendar.DATE) + ";" + tmp.getNgay().get(Calendar.MONTH) + ";" + tmp.getNgay().get(Calendar.YEAR) + ";";
+                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
                     line += tmp.getKh().getMaKhach();
                     for(sanPhamSoLuong j : tmp.getDs_sp()){
-                        line+= ";" + j.getSP().getMaSP() + ";" + j.getSoLuong() ;
+                        line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
                     }
                     line +="\n";
                 }
@@ -150,13 +150,12 @@ public class DS_HD {
     public void docfile(){
         try {
             BufferedReader input = new BufferedReader(new FileReader("hoaDon.txt"));
-            String line = input.readLine();
-            this.n = Integer.parseInt(line);
+            String line = "";
             while (true) {
             line = input.readLine();
             if(line == null) break;
 
-            String[] arr = line.split(";");
+            String[] arr = line.split(",");
             if(arr[0].contains("hdk"))////Nhận diện bằng mã hóa đơn
             {
                 DS_KH ds_KH = new DS_KH();
@@ -186,7 +185,7 @@ public class DS_HD {
             // else{
                 
             // }
-
+            this.n = hd.size();
             }
             input.close();
             } catch (Exception ex) {

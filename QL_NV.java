@@ -30,10 +30,18 @@ public class QL_NV {
                 case 6: ds_nv.xoa();
                     break;
 
-                case 7: ds_nv.docfile();
+                case 7: {
+                    System.out.println("------------------------------------------------");
+                    System.out.println("\tTAI DANH SACH NHAN VIEN THANH CONG");
+                    ds_nv.docfile();
+                }
                     break;
 
-                case 8: ds_nv.ghifile();
+                case 8: {
+                    System.out.println("------------------------------------------");
+                    System.out.println("\tLUU DANH SACH NHAN VIEN THANH CONG");
+                    ds_nv.ghifile();
+                }
                     break;
 
                 case 9: ;

@@ -265,8 +265,6 @@ public class DS_SP {
 
     public void ghifile(){
         try{
-            System.out.println("----------------------------------------");
-            System.out.println("\tLUU DANH SACH SAN PHAM");
             FileWriter f = new FileWriter("sanPham.txt");
             String line = sp.size() + "\n";
             for(int i = 0; i < n; i++){
@@ -292,8 +290,6 @@ public class DS_SP {
 
     public void docfile(){
         try {
-            System.out.println("--------------------------------------");
-            System.out.println("\tTAI DANH SACH SAN PHAM");
             BufferedReader f = new BufferedReader( new FileReader("sanPham.txt"));
             String line = f.readLine();
             n = Integer.parseInt(line);

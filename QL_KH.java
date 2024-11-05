@@ -29,10 +29,18 @@ public class QL_KH {
                 case 6: ds_kh.xoa();
                     break;
 
-                case 7: ds_kh.docfile();
+                case 7: {
+                    System.out.println("------------------------------------------------");
+                    System.out.println("\tTAI DANH SACH KHACH HANG THANH CONG");
+                    ds_kh.docfile();
+                }
                     break;
 
-                case 8: ds_kh.ghifile();
+                case 8: {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("\tLUU DANH SACH KHACH HANG THANH CONG");
+                    ds_kh.ghifile();
+                }
                     break;
 
                 case 9: ;

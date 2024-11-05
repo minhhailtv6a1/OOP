@@ -30,10 +30,18 @@ public class QL_SP {
                 case 6: ds_sp.xoa();
                     break;
 
-                case 7: ds_sp.docfile();
+                case 7: {
+                    System.out.println("------------------------------------------------");
+                    System.out.println("\tTAI DANH SACH SAN PHAM THANH CONG");
+                    ds_sp.docfile();
+                }
                     break;
 
-                case 8: ds_sp.ghifile();
+                case 8: {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("\tLUU DANH SACH SAN PHAM THANH CONG");
+                    ds_sp.ghifile();
+                }
                     break;
 
                 case 9: ;

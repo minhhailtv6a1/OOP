@@ -185,14 +185,12 @@ public class DS_KH {
 
     public void ghifile(){
         try{
-            System.out.println("----------------------------------------");
-            System.out.println("\tLUU DANH SACH KHACH HANG");
             FileWriter f = new FileWriter("khachHang.txt");
-            String line = ds_kh.size() + "\n";
+            String line = "";
             for(int i=0;i<n;i++){
                 khachHang  tmp = ds_kh.get(i);
-                line += tmp.getMaKhach() + ";"  + tmp.getHoTen() + ";" + tmp.getNamSinh() + ";" + tmp.getGioiTinh() + ";";
-                line += tmp.getSoDienThoai() + ";" + tmp.getDiemTichLuy() + "\n";
+                line += tmp.getMaKhach() + ","  + tmp.getHoTen() + "," + tmp.getNamSinh() + "," + tmp.getGioiTinh() + ",";
+                line += tmp.getSoDienThoai() + "," + tmp.getDiemTichLuy() + "\n";
             }
             f.write(line);
             f.close();
@@ -203,17 +201,14 @@ public class DS_KH {
 
     public void docfile(){
         try {
-            System.out.println("--------------------------------------");
-            System.out.println("\tTAI DANH SACH KHACH HANG");
             BufferedReader f = new BufferedReader( new FileReader("khachHang.txt"));
-            String line = f.readLine();
-            n = Integer.parseInt(line);
+            String line = "";
             // System.out.println(n);
             ds_kh.clear();
             while(true){
                 line = f.readLine();
                 if(line==null) break;
-                String []a = line.split(";");
+                String []a = line.split(",");
                 khachHang tmp = new khachHang();
                 // for(int i = 0; i<a.length;i++){
                 //     System.out.println(a[i]);
@@ -228,6 +223,7 @@ public class DS_KH {
                 // tmp.xuat();
                 ds_kh.add(tmp);
             }
+            this.n = ds_kh.size();
         } catch (Exception e) {
             System.out.println(e);
         }        
