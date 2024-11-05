@@ -266,19 +266,19 @@ public class DS_SP {
     public void ghifile(){
         try{
             FileWriter f = new FileWriter("sanPham.txt");
-            String line = sp.size() + "\n";
+            String line = "";
             for(int i = 0; i < n; i++){
                 if(sp.get(i) instanceof doAn){
                     doAn tmp = new doAn();
                     tmp = (doAn)sp.get(i);
-                    line += tmp.getMaSP() + ";" + tmp.getTenSP() + ";" + (int)tmp.getGiaSP() + ";";
-                    line += tmp.getNguyenLieu() + ";" + tmp.getLoaiDoAn() + "\n";
+                    line += tmp.getMaSP() + "," + tmp.getTenSP() + "," + (int)tmp.getGiaSP() + ",";
+                    line += tmp.getNguyenLieu() + "," + tmp.getLoaiDoAn() + "\n";
                 }
                 else if(sp.get(i)  instanceof thucUong){
                     thucUong tmp = new thucUong();
                     tmp = (thucUong)sp.get(i);
-                    line += tmp.getMaSP() + ";" + tmp.getTenSP() + ";" + tmp.getGiaSP() + ";";
-                    line += tmp.getSize() + ";" + tmp.getLuongDa()  + ";" + tmp.getNongDoDuong() + "\n";
+                    line += tmp.getMaSP() + "," + tmp.getTenSP() + "," + tmp.getGiaSP() + ",";
+                    line += tmp.getSize() + "," + tmp.getLuongDa()  + "," + tmp.getNongDoDuong() + "\n";
                 }
             }
             f.write(line);
@@ -291,14 +291,13 @@ public class DS_SP {
     public void docfile(){
         try {
             BufferedReader f = new BufferedReader( new FileReader("sanPham.txt"));
-            String line = f.readLine();
-            n = Integer.parseInt(line);
+            String line = "";
             // System.out.println(n);
             sp.clear();
             while(true){
                 line = f.readLine();
                 if(line==null) break;
-                String []a = line.split(";");
+                String []a = line.split(",");
                 if(a.length==5){
                     doAn tmp = new doAn();
                     tmp.setMaSP(a[0]);
@@ -319,6 +318,7 @@ public class DS_SP {
                     sp.add(tmp);
                 }
             }
+            this.n = sp.size();
         } catch (Exception e) {
             System.out.println(e);
         }

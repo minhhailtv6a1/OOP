@@ -1,3 +1,2 @@
-2
-sp01;mi xao;35000;mi;mi
-sp02;cafe sua;50000.0;xl;50.0;70.0
+sp01,mi xao,35000,mi,mi
+sp02,cafe sua,50000.0,xl,50.0,70.0

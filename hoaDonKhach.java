@@ -9,7 +9,7 @@ public class hoaDonKhach extends hoaDon{
 
     public hoaDonKhach(){
         this.kh=new khachHang();
-        this.ds_sp=new ArrayList<sanPhamSoLuong>();
+        this.ds_sp=new ArrayList<   sanPhamSoLuong>();
     }
 
     public hoaDonKhach(khachHang kh, ArrayList<sanPhamSoLuong> ds_sp){
