@@ -82,6 +82,14 @@ public class DS_KH {
         return new khachHang();
     }
 
+    public khachHang timMa(String ma){
+        for(int i=0;i<n;i++){
+            if(ds_kh.get(i).getMaKhach().equals(ma))
+            return ds_kh.get(i);
+        }
+        return new khachHang();
+    }
+
     public void xoa(){
         System.out.println("--------------------------------");
         System.out.println("\tXOA KHACH HANG");
@@ -222,7 +230,6 @@ public class DS_KH {
             }
         } catch (Exception e) {
             System.out.println(e);
-        }
-        
+        }        
     }
 }

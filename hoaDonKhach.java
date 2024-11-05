@@ -28,7 +28,11 @@ public class hoaDonKhach extends hoaDon{
         sc.nextLine();
         this.setNgay(d);
 
-        kh.nhap();
+        DS_KH ds_kh = new DS_KH();
+        ds_kh.docfile();
+
+        System.out.print("Nhap ma khach hang: ");
+        kh=ds_kh.timMa();
 
         System.out.print("Nhap so luong san pham: ");
         n=sc.nextInt();

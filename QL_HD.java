@@ -5,7 +5,9 @@ public class QL_HD {
     public void menuHD(){
         Scanner sc=new Scanner(System.in);
         while (true) {
-            System.out.println("\n1. Hoa don khach");
+            System.out.println("--------------------------------");
+            System.out.println("\tQUAN LI HOA DON");
+            System.out.println("1. Hoa don khach");
             System.out.println("2. Hoa don nhap hang");
             System.out.println("3. Thoat");
             System.out.print("Hay chon chuc nang: ");
@@ -58,7 +60,9 @@ public class QL_HD {
         }
     }
     public void menuFunction(){
-        System.out.println("\n1. Nhap danh sach hoa don");
+        System.out.println("--------------------------------");
+        System.out.println("\tQUAN LI HOA DON KHACH");
+        System.out.println("1. Nhap danh sach hoa don");
         System.out.println("2. Xuat danh sach hoa don");
         System.out.println("3. Tim kiem hoa don");
         System.out.println("4. Them hoa don");

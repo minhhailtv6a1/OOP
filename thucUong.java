@@ -1,18 +1,32 @@
+import java.util.Scanner;
 public class thucUong extends sanPham {
     private String size;
-    private boolean coDa;
+    private float luongDa;
     private float nongDoDuong;
     public thucUong(){
         super();
         size="";
-        coDa=true;
+        luongDa=0;
         nongDoDuong=0;
     }
-    public thucUong(String maSP, String tenSP, double giaSP,String size,boolean coDa, float nongDoDuong) {
+    public thucUong(String maSP, String tenSP, double giaSP,String size,float luongDa, float nongDoDuong) {
         super(maSP, tenSP, giaSP);
         this.size=size;
-        this.coDa=coDa;
+        this.luongDa=luongDa;
         this.nongDoDuong=nongDoDuong;
+    }
+
+    @Override
+    public void nhap() {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+        super.nhap();
+        System.out.println("Nhap size: ");
+        this.size = sc.nextLine();
+        System.out.println("Nhap luong da: ");
+        this.luongDa = Float.parseFloat(sc.nextLine());
+        System.out.println("Nhap nong do duong: ");
+        this.nongDoDuong = Float.parseFloat(sc.nextLine());
     }
 
     @Override
@@ -20,12 +34,12 @@ public class thucUong extends sanPham {
         // TODO Auto-generated method stub
         super.xuat();
         System.out.println("Size: " + this.size);
-        String ice = this.coDa==true?"co":"khong";
-        System.out.println("Co da: " + ice);
+        System.out.println("Luong da: " + this.luongDa);
+        System.out.println("Nong do duong: " + this.nongDoDuong);
     }
 
-    public void setCoDa(boolean coDa) {
-        this.coDa = coDa;
+    public void setLuongDa(float luongDa) {
+        this.luongDa = luongDa;
     }
     public void setNongDoDuong(float nongDoDuong) {
         this.nongDoDuong = nongDoDuong;
@@ -38,5 +52,8 @@ public class thucUong extends sanPham {
     }
     public float getNongDoDuong() {
         return nongDoDuong;
+    }
+    public float getLuongDa() {
+        return luongDa;
     }
 }

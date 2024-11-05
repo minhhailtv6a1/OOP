@@ -4,6 +4,7 @@ public class QL_KH {
 
     public void menu(){
         Scanner sc=new Scanner(System.in);
+        ds_kh.docfile();
         while(true){
             menuFunction();
             System.out.print("Hay chon chuc nang: ");

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class doAn extends sanPham {
     private String nguyenLieu;
     private String loaiDoAn;
@@ -12,6 +14,17 @@ public class doAn extends sanPham {
         super(maSP, tenSP, giaSP);
         this.nguyenLieu=nguyenLieu;
         this.loaiDoAn=loaiDoAn;
+    }
+
+    @Override
+    public void nhap() {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
+        super.nhap();
+        System.out.print("Nhap nguyen lieu: ");
+        this.nguyenLieu = sc.nextLine();
+        System.out.print("Nhap loai do an: ");
+        this.loaiDoAn = sc.nextLine();
     }
 
     @Override
