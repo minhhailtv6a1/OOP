@@ -22,9 +22,11 @@ public class DS_HH {
             System.out.println("3. Thoat");
             System.out.print("Nhap loai hang hoa: ");
             loai = sc.nextInt();
+            sc.nextLine();
             while (loai < 1|| loai > 3) {
                 System.out.println("Nhap sai, vui long nhap lai");
                 loai = sc.nextInt();
+                sc.nextLine();
             }
         return loai;
     }
@@ -43,17 +45,14 @@ public class DS_HH {
                 hh = new thucPham();
             }
             hh.nhapHangHoa();
-            hh.xuatHangHoa();
             ds.add(hh);
         }
         soLuong += count;
-        System.out.println(ds.size());
     }
     public void xuat() {
         System.out.println();
         System.out.println(ds.size());
         for (int i=0; i<ds.size(); i++) {
-            System.out.println("hihi");
             ds.get(i).xuatHangHoa();
         }
         System.out.println();
