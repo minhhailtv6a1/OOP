@@ -51,7 +51,7 @@ public class DS_HH {
     }
     public void xuat() {
         System.out.println();
-        System.out.println(ds.size());
+        // System.out.println(ds.size());
         for (int i=0; i<ds.size(); i++) {
             ds.get(i).xuatHangHoa();
         }
@@ -264,7 +264,7 @@ public class DS_HH {
             while(line != null) {
                 String []cur = line.split(",");
                 hangHoa tmp;
-                if (cur[0] == "1") {
+                if (cur[0].equals("1")) {
                     tmp = new noiThat(cur[1], cur[2], Integer.parseInt(cur[3]), Double.parseDouble(cur[4])
                     , cur[5], Integer.parseInt(cur[6]), cur[7]);
                 }
