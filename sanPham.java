@@ -1,29 +1,37 @@
+public abstract class sanPham {
+    protected String id; // ID sản phẩm
+    protected String ten; // Tên sản phẩm
+    protected double gia; // Giá sản phẩm
 
-abstract class sanPham {
-    private static int count = 0; // Biến đếm số lượng sản phẩm
-    private int id; // ID sản phẩm
-    private String ten; // Tên sản phẩm
-    private String gia; // Giá sản phẩm
+    // Hàm khởi tạo không tham số
+    public sanPham() {
+        this.id = "default_id"; // Giá trị mặc định cho id
+        this.ten = "default_name"; // Giá trị mặc định cho tên
+        this.gia = 0; // Giá trị mặc định cho giá
+    }
 
-    // Hàm thiết lập
-    public sanPham(String ten, String gia) {
-        this.ten = ten;
-        this.gia = gia;
-        this.id = ++count; // Tăng id mỗi khi có sản phẩm mới
+    // Hàm khởi tạo có tham số
+    public sanPham(String id, String ten, double gia) {
+        this.id = id; // Thiết lập id sản phẩm từ tham số
+        this.ten = ten; // Thiết lập tên sản phẩm
+        this.gia = gia; // Thiết lập giá sản phẩm
     }
 
     // Phương thức set
+    public void setId(String id) {
+        this.id = id; // Thiết lập id sản phẩm
+    }
+
     public void setTen(String ten) {
         this.ten = ten; // Thiết lập tên sản phẩm
     }
 
-    public void setGia(String gia) {
+    public void setGia(double gia) {
         this.gia = gia; // Thiết lập giá sản phẩm
     }
 
-
     // Phương thức get
-    public int getId() {
+    public String getId() {
         return id; // Trả về ID sản phẩm
     }
 
@@ -31,10 +39,13 @@ abstract class sanPham {
         return ten; // Trả về tên sản phẩm
     }
 
-    public String getGia() {
+    public double getGia() {
         return gia; // Trả về giá sản phẩm
     }
 
     // Phương thức trừu tượng để hiển thị thông tin sản phẩm
     public abstract void hienThiThongTin();
+
+    @Override
+    public abstract String toString();
 }

@@ -1,10 +1,15 @@
-
 public class doAn extends sanPham {
     private String loai; // Loại món ăn
 
-    // Hàm thiết lập
-    public doAn(String ten, String gia, String loai) {
-        super(ten, gia); // Gọi hàm thiết lập của lớp cha
+    // Hàm thiết lập không tham số
+    public doAn() {
+        super(); // Gọi hàm thiết lập không tham số của lớp cha sanPham()
+        this.loai = "Unknown"; // Thiết lập giá trị mặc định cho loại món ăn
+    }
+
+    // Hàm thiết lập có tham số
+    public doAn(String id, String ten, double gia, String loai) {
+        super(id, ten, gia); // Gọi hàm thiết lập của lớp cha với id, ten, gia
         this.loai = loai; // Thiết lập loại món ăn
     }
 
@@ -19,8 +24,18 @@ public class doAn extends sanPham {
     }
 
     @Override
-    public void hienThiThongTin() {
-        // Hiển thị thông tin món ăn
-        System.out.println("Do An - ID: " + getId() + ", Ten: " + getTen() + ", Gia: " + getGia() + ", Loai: " + loai);
+    public void hienThiThongTin() { // Hiển thị thông tin món ăn
+        System.out.printf("%-10s %-10s %-40s %-15s %-10s%n",
+                "Do An",
+                "ID: " + getId(),
+                "Ten: " + getTen(),
+                "Loai: " + loai,
+                "Gia: " + getGia());
     }
+
+    @Override
+    public String toString() {
+        return "doAn," + id + "," + ten + "," + gia + "," + loai;
+    }
+
 }

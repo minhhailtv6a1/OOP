@@ -1,16 +1,26 @@
-doAn,Banh mi kep,16000
-Mon kho
-doAn,Bun Bo Hue,30000
+HT001,doAn,Hu tieu,25000.0
 Mon nuoc
-thucUong,Tra sua tran chau,22000
+CF001,thucUong,Cafe den,15000.0
+S
+TS001,thucUong,Tra sua thai xanh,20000.0
 M
-thucUong,Tra tac,20000
+TS002,thucUong,Tra sua tran chau ,25000.0
+M
+BB101,doAn,Banh bao trung cut,18000.0
+Mon kho
+MK001,doAn,Mi tron indomie xuc xich mini,21000.0
+Mon kho
+NE001,thucUong,Nuoc ep cam,25000.0
 L
-thucUong,Ep oi,20000
-M
-thucUong,Matcha latte,30000
-M
-doAn,Mi tron Indomie,17000
+NE002,thucUong,Nuoc ep oi,25000.0
+L
+AV001,doAn,Banh trang tron,20000.0
 Mon kho
-doAn,Bun Rieu,30000
-Mon nuoc
+BB002,doAn,Banh bao trung muoi,22000.0
+Mon kho
+XM001,doAn,Xoi ga,20000.0
+Mon kho
+XM002,doAn,Xoi xi quach,20000.0
+Mon kho
+ST001,thucUong,Sinh to dau,25000.0
+L
