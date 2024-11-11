@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DS_SP {
+public class DS_SP implements danhSach{
     ArrayList<sanPham> sp;
     int n;
     int select;
@@ -263,7 +263,7 @@ public class DS_SP {
         }
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try{
             FileWriter f = new FileWriter("sanPham.txt");
             String line = "";
@@ -288,7 +288,7 @@ public class DS_SP {
         }
     }
 
-    public void docfile(){
+    public void docFile(){
         try {
             BufferedReader f = new BufferedReader( new FileReader("sanPham.txt"));
             String line = "";

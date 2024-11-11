@@ -9,12 +9,14 @@ public class hoaDonKhach extends hoaDon{
 
     public hoaDonKhach(){
         this.kh=new khachHang();
-        this.ds_sp=new ArrayList<   sanPhamSoLuong>();
+        this.ds_sp=new ArrayList<sanPhamSoLuong>();
     }
 
-    public hoaDonKhach(khachHang kh, ArrayList<sanPhamSoLuong> ds_sp){
+    public hoaDonKhach(Calendar ngay, String maHoaDon, khachHang kh, ArrayList<sanPhamSoLuong> ds_sp, int n){
+        super(ngay, maHoaDon);
         this.kh=kh;
         this.ds_sp=ds_sp;
+        this.n = n;
     }
 
     public void nhap(){
@@ -22,15 +24,18 @@ public class hoaDonKhach extends hoaDon{
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap ma hoa don: ");
         this.setMaHoaDon(sc.nextLine());
-        System.out.println("Nhap ngay (yyyy//mm/dd): ");
+        System.out.println("Nhap ngay (dd/mm/yyyy): ");
         Calendar d=Calendar.getInstance();
-        d.set(sc.nextInt(), sc.nextInt(), sc.nextInt());
+        int x = sc.nextInt(), y = sc.nextInt(), z = sc.nextInt();
         sc.nextLine();
+        d.set(z, y, x);
         this.setNgay(d);
 
+        //Lấy ra danh sách khách hàng
         DS_KH ds_kh = new DS_KH();
-        ds_kh.docfile();
+        ds_kh.docFile();
 
+        //Nhập mã khách để tìm khách trong dsKH rồi ghi vào hóa đơn
         System.out.print("Nhap ma khach hang: ");
         kh=ds_kh.timMa();
 

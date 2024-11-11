@@ -5,36 +5,53 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class DS_HD {
+public class DS_HD implements danhSach {
     ArrayList<hoaDon> hd;
     int n;
-    int select;//Chon hoaDonKhach hay hoaDonNhap
+    // int select;//Chon hoaDonKhach hay hoaDonNhap
     public DS_HD(){
         hd=new ArrayList<hoaDon>();
         n=0;
-        select=0;
+        // select=0;
     }
 
-    public DS_HD(ArrayList<hoaDon> hd,int n,int select){
+    public DS_HD(ArrayList<hoaDon> hd,int n){
         this.n=n;
         this.hd=hd;
-        this.select=select;
+        // this.select=select;
     }
 
-    public void chonHoaDon(int x){
-        select=x;
+    public int chonHoaDon(){
+        Scanner sc = new Scanner(System.in);
+        int loai;  
+            System.out.println("1. Hoa don khach");
+            System.out.println("2. Hoa don nhap hang");
+            System.out.println("3. Thoat");
+            System.out.print("Chon loai hoa don: ");
+            loai = sc.nextInt();
+            sc.nextLine();
+            while (loai < 1|| loai > 3) {
+                System.out.println("Nhap sai, vui long nhap lai");
+                loai = sc.nextInt();
+                sc.nextLine();
+            }
+        return loai;
     }
     public void nhap(){
         System.out.println("--------------------------------");
         System.out.println("\tNHAP DANH SACH HOA DON");
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap so luong hoa don: ");
-        this.n=sc.nextInt();
+        int n1=sc.nextInt();
         sc.nextLine();
-        for(int i=0;i<n;i++){
+        this.n += n1;
+        // int select = chonHoaDon();
+        for(int i=0;i<n1;i++){
+            int select = chonHoaDon();
+            if(select == 3) return;
             hoaDon tmp;
-            if(this.select==1) tmp=new hoaDonKhach();
-            else tmp=new hoaDonKhach();//hoaDonNhap
+            if(select==1) tmp=new hoaDonKhach();
+            else tmp=new hoaDonNhapHang();//hoaDonNhap
             tmp.nhap();
             hd.add(tmp);
         }
@@ -74,8 +91,10 @@ public class DS_HD {
         System.out.println("--------------------------------");
         System.out.println("\tTHEM HOA DON");
         hoaDon tmp;
-        if(this.select==1) tmp=new hoaDonKhach();
-            else tmp=new hoaDonKhach();//hoaDonNhap
+        int select = chonHoaDon();
+        if(select == 3) return;
+        if(select==1) tmp=new hoaDonKhach();
+            else tmp=new hoaDonNhapHang();//hoaDonNhap
         tmp.nhap();
         them(tmp);
     }
@@ -120,12 +139,12 @@ public class DS_HD {
             }
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try {
             FileWriter fw = new FileWriter("hoaDon.txt");
             String line = "";
             for(int i=0;i<n;i++){
-                if(hd.get(i) instanceof hoaDonKhach){
+                if(hd.get(i) instanceof hoaDonKhach){ // hoa don khach
                     hoaDonKhach tmp=(hoaDonKhach)hd.get(i);
                     line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
                     line += tmp.getKh().getMaKhach();
@@ -136,9 +155,14 @@ public class DS_HD {
                 }
 
                 // hoa doa nhap
-                // else{
-
-                // }
+                else{
+                    hoaDonNhapHang tmp = (hoaDonNhapHang)hd.get(i);
+                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR);
+                    for(hangHoa x: tmp.getHh()){
+                        line += "," + x.getMaHang();
+                    }
+                    line += "\n";
+                }
             }
             fw.write(line);
             fw.close();
@@ -147,7 +171,7 @@ public class DS_HD {
                 System.out.println(e);            
             }
     }
-    public void docfile(){
+    public void docFile(){
         try {
             BufferedReader input = new BufferedReader(new FileReader("hoaDon.txt"));
             String line = "";
@@ -159,7 +183,7 @@ public class DS_HD {
             if(arr[0].contains("hdk"))////Nhận diện bằng mã hóa đơn
             {
                 DS_KH ds_KH = new DS_KH();
-                ds_KH.docfile();
+                ds_KH.docFile();
                 hoaDonKhach tmp = new hoaDonKhach();
                 tmp.setMaHoaDon(arr[0]);
                 Calendar date=Calendar.getInstance();
@@ -169,7 +193,7 @@ public class DS_HD {
                 //Cho setKh = kh ma tim duoc trong ds_KH bang ma
                 tmp.setKh(ds_KH.timMa(arr[4]));              
                 DS_SP ds_SP = new DS_SP();
-                ds_SP.docfile();
+                ds_SP.docFile();
                 
                 sanPhamSoLuong sp1=new sanPhamSoLuong();
                 for(int i=5;i<arr.length-1;i+=2){
@@ -182,9 +206,30 @@ public class DS_HD {
             }
 
             // Hoa don nhap
-            // else{
-                
-            // }
+            else{
+                DS_HH ds_HH = new DS_HH();
+                ds_HH.docFile();
+
+                hoaDonNhapHang tmp = new hoaDonNhapHang();
+                tmp.setMaHoaDon(arr[0]);
+                Calendar date=Calendar.getInstance();
+                date.set(Integer.parseInt(arr[3]), Integer.parseInt(arr[2]), Integer.parseInt(arr[1]));
+                tmp.setNgay(date);
+
+                hangHoa hh_tmp;
+                for(int i=4;i<arr.length;i++){
+                    if(arr[i].contains("tp")) hh_tmp = new thucPham();
+                    else hh_tmp = new noiThat();
+
+                    hh_tmp = ds_HH.searchHH(arr[i]);
+                    // hh_tmp.xuatHangHoa();
+                    tmp.getHh().add(hh_tmp);
+                    tmp.setN(tmp.getHh().size());
+                    // System.out.println(tmp.getHh());
+                }
+                hd.add(tmp);
+                // System.out.println(hd.size());
+            }
             this.n = hd.size();
             }
             input.close();

@@ -4,7 +4,7 @@ public class QL_NV {
 
     public void menu(){
         Scanner sc=new Scanner(System.in);
-        ds_nv.docfile();
+        ds_nv.docFile();
         while(true){
             menuFunction();
             System.out.print("Hay chon chuc nang: ");
@@ -33,14 +33,14 @@ public class QL_NV {
                 case 7: {
                     System.out.println("------------------------------------------------");
                     System.out.println("\tTAI DANH SACH NHAN VIEN THANH CONG");
-                    ds_nv.docfile();
+                    ds_nv.docFile();
                 }
                     break;
 
                 case 8: {
                     System.out.println("------------------------------------------");
                     System.out.println("\tLUU DANH SACH NHAN VIEN THANH CONG");
-                    ds_nv.ghifile();
+                    ds_nv.ghiFile();
                 }
                     break;
 

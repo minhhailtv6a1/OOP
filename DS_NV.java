@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class DS_NV {
+public class DS_NV implements danhSach{
     ArrayList<nhanVien> nv;
     int n;
 
@@ -198,7 +198,7 @@ public class DS_NV {
         }
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try{
             FileWriter f = new FileWriter("nhanVien.txt");
             String line = "";
@@ -215,7 +215,7 @@ public class DS_NV {
         }
     }
 
-    public void docfile(){
+    public void docFile(){
         try {
             BufferedReader f = new BufferedReader( new FileReader("nhanVien.txt"));
             String line = "";

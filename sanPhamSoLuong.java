@@ -15,7 +15,7 @@ public class sanPhamSoLuong {
 
     public void nhap(){
         DS_SP  ds_sp = new DS_SP();
-        ds_sp.docfile();
+        ds_sp.docFile();
         System.out.print("Nhap ma san pham: ");
         sp=ds_sp.timMa();
         Scanner sc=new Scanner(System.in);
