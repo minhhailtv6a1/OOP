@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class QL_CUA_HANG {
+    static QL_NV ql_NV = new QL_NV();
+    static QL_KH ql_KH = new QL_KH();
+    static QL_SP ql_SP = new QL_SP();
+    static QL_HH ql_HH = new QL_HH();
+    static QL_HD ql_HD = new QL_HD();
     public static void menu(){
         System.out.println("---------------------------------");
         System.out.println("\tQUAN LI CUA HANG");
@@ -12,12 +17,6 @@ public class QL_CUA_HANG {
         System.out.println("6. Thoat");
     }
     public static void main(String[] args) {
-        QL_NV ql_NV = new QL_NV();
-        QL_KH ql_KH = new QL_KH();
-        QL_SP ql_SP = new QL_SP();
-        QL_HH ql_HH = new QL_HH();
-        QL_HD ql_HD = new QL_HD();
-
         while(true){
             menu();
             System.out.print("Hay chon chuc nang: ");

@@ -84,6 +84,14 @@ public class DS_NV implements danhSach{
         return new nhanVien();
     }
 
+    public nhanVien timMa(String ma){
+        for(int i=0;i<n;i++){
+            if(nv.get(i).getMaNhanVien().equals(ma))
+            return nv.get(i);
+        }
+        return new nhanVien();
+    }
+
     public void xoa(){
         System.out.println("--------------------------------");
         System.out.println("\tXOA NHAN VIEN");

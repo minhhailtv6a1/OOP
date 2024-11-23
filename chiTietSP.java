@@ -1,14 +1,14 @@
 import java.util.Scanner;
-public class sanPhamSoLuong {
+public class chiTietSP {
     private sanPham sp;
     private int soLuong;
 
-    public sanPhamSoLuong(sanPham sp, int soLuong) {
+    public chiTietSP(sanPham sp, int soLuong) {
         this.sp = sp;
         this.soLuong = soLuong;
     }
 
-    public sanPhamSoLuong(){
+    public chiTietSP(){
         this.sp=new sanPham();
         this.soLuong=0;
     }

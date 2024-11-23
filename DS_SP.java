@@ -25,7 +25,7 @@ public class DS_SP implements danhSach{
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong san pham: ");
         int n1 = Integer.parseInt(sc.nextLine());
-        n+=n1;
+        this.n += n1;
         for(int i=0;i<n1;i++){
             sanPham tmp;
             System.out.print("Chon do an (1) / thuc uong (2): ");

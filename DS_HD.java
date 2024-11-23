@@ -44,16 +44,19 @@ public class DS_HD implements danhSach {
         System.out.print("Nhap so luong hoa don: ");
         int n1=sc.nextInt();
         sc.nextLine();
-        this.n += n1;
         // int select = chonHoaDon();
         for(int i=0;i<n1;i++){
             int select = chonHoaDon();
-            if(select == 3) return;
+            if(select == 3){ 
+                // n1 = i;
+                return;
+            }
             hoaDon tmp;
             if(select==1) tmp=new hoaDonKhach();
             else tmp=new hoaDonNhapHang();//hoaDonNhap
             tmp.nhap();
             hd.add(tmp);
+            this.n ++;
         }
     }
 
@@ -121,6 +124,14 @@ public class DS_HD implements danhSach {
             }
     }
 
+    public hoaDon timMa(String ma){
+        for(int i=0;i<n;i++)
+            if(hd.get(i).getMaHoaDon().equals(ma)){
+                return hd.get(i);
+            }
+        return null;
+    }
+
     public void sua(){
         System.out.println("--------------------------------");
         System.out.println("\tSUA HOA DON");
@@ -131,12 +142,10 @@ public class DS_HD implements danhSach {
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap ma muon sua: ");
         String ma = sc.nextLine();
-        sc.nextLine();
-        for(int i=0;i<n;i++)
-            if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.get(i).nhap();
-                break;
-            }
+        hoaDon tmp = timMa(ma);
+        int index = hd.indexOf(tmp);
+        tmp.nhap();
+        hd.set(index, tmp);
     }
 
     public void ghiFile(){
@@ -147,8 +156,9 @@ public class DS_HD implements danhSach {
                 if(hd.get(i) instanceof hoaDonKhach){ // hoa don khach
                     hoaDonKhach tmp=(hoaDonKhach)hd.get(i);
                     line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
-                    line += tmp.getKh().getMaKhach();
-                    for(sanPhamSoLuong j : tmp.getDs_sp()){
+                    line += tmp.getKh().getMaKhach() + ",";
+                    line += tmp.getNv().getMaNhanVien();
+                    for(chiTietSP j : tmp.getDs_sp()){
                         line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
                     }
                     line +="\n";
@@ -157,7 +167,8 @@ public class DS_HD implements danhSach {
                 // hoa doa nhap
                 else{
                     hoaDonNhapHang tmp = (hoaDonNhapHang)hd.get(i);
-                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR);
+                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
+                    line += tmp.getNv().getMaNhanVien() + ",";
                     for(hangHoa x: tmp.getHh()){
                         line += "," + x.getMaHang();
                     }
@@ -182,21 +193,29 @@ public class DS_HD implements danhSach {
             String[] arr = line.split(",");
             if(arr[0].contains("hdk"))////Nhận diện bằng mã hóa đơn
             {
-                DS_KH ds_KH = new DS_KH();
-                ds_KH.docFile();
                 hoaDonKhach tmp = new hoaDonKhach();
                 tmp.setMaHoaDon(arr[0]);
                 Calendar date=Calendar.getInstance();
                 date.set(Integer.parseInt(arr[3]), Integer.parseInt(arr[2]), Integer.parseInt(arr[1]));
                 tmp.setNgay(date);
 
+                //Đọc file ds_KH
+                DS_KH ds_KH = new DS_KH();
+                ds_KH.docFile();
                 //Cho setKh = kh ma tim duoc trong ds_KH bang ma
-                tmp.setKh(ds_KH.timMa(arr[4]));              
+                tmp.setKh(ds_KH.timMa(arr[4]));  
+                
+                //Đọc file ds_NV
+                DS_NV ds_NV = new DS_NV();
+                ds_NV.docFile();;
+                tmp.setNv(ds_NV.timMa(arr[5]));
+
+                //Đọc file ds_SP
                 DS_SP ds_SP = new DS_SP();
                 ds_SP.docFile();
                 
-                sanPhamSoLuong sp1=new sanPhamSoLuong();
-                for(int i=5;i<arr.length-1;i+=2){
+                chiTietSP sp1=new chiTietSP();
+                for(int i=6;i<arr.length-1;i+=2){
                     //Cho setSP = SP ma tim duoc trong ds_SP bang ma
                     sp1.setSP(ds_SP.timMa(arr[i]));
                     sp1.setSoLuong(Integer.parseInt(arr[i+1]));
@@ -207,17 +226,22 @@ public class DS_HD implements danhSach {
 
             // Hoa don nhap
             else{
-                DS_HH ds_HH = new DS_HH();
-                ds_HH.docFile();
-
                 hoaDonNhapHang tmp = new hoaDonNhapHang();
                 tmp.setMaHoaDon(arr[0]);
                 Calendar date=Calendar.getInstance();
                 date.set(Integer.parseInt(arr[3]), Integer.parseInt(arr[2]), Integer.parseInt(arr[1]));
                 tmp.setNgay(date);
 
+                //Đọc file ds_NV
+                DS_NV ds_NV = new DS_NV();
+                ds_NV.docFile();
+                tmp.setNv(ds_NV.timMa(arr[4]));
+
+                //Đọc file ds_HH
+                DS_HH ds_HH = new DS_HH();
+                ds_HH.docFile();
                 hangHoa hh_tmp;
-                for(int i=4;i<arr.length;i++){
+                for(int i=5;i<arr.length;i++){
                     if(arr[i].contains("tp")) hh_tmp = new thucPham();
                     else hh_tmp = new noiThat();
 
