@@ -1,51 +1,62 @@
-public abstract class sanPham {
-    protected String id; // ID sản phẩm
-    protected String ten; // Tên sản phẩm
-    protected double gia; // Giá sản phẩm
+import java.util.Scanner;
 
-    // Hàm khởi tạo không tham số
-    public sanPham() {
-        this.id = "default_id"; // Giá trị mặc định cho id
-        this.ten = "default_name"; // Giá trị mặc định cho tên
-        this.gia = 0; // Giá trị mặc định cho giá
+
+   public class sanPham {
+    private String maSP;
+    private String tenSP;
+    private double giaSP;
+
+    public sanPham(){
+        maSP="";
+        tenSP="";
+        giaSP=0;
     }
 
-    // Hàm khởi tạo có tham số
-    public sanPham(String id, String ten, double gia) {
-        this.id = id; // Thiết lập id sản phẩm từ tham số
-        this.ten = ten; // Thiết lập tên sản phẩm
-        this.gia = gia; // Thiết lập giá sản phẩm
+    public sanPham(String maSP,String tenSP,double giaSP){
+        this.maSP=maSP;
+        this.tenSP=tenSP;
+        this.giaSP=giaSP;
     }
 
-    // Phương thức set
-    public void setId(String id) {
-        this.id = id; // Thiết lập id sản phẩm
+    public void nhap(){
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Ma san pham: ");
+        this.maSP=sc.nextLine();
+        System.out.print("Ten san pham: ");
+        this.tenSP=sc.nextLine();
+        System.out.print("Gia san pham: ");
+        this.giaSP=sc.nextDouble();
+        sc.nextLine();
     }
 
-    public void setTen(String ten) {
-        this.ten = ten; // Thiết lập tên sản phẩm
+    public void xuat(){
+        System.out.println("Ma san pham: " + this.maSP);
+        System.out.println("Ten san pham: " + this.tenSP);
+        System.out.println("Gia san pham: " + this.giaSP);
     }
 
-    public void setGia(double gia) {
-        this.gia = gia; // Thiết lập giá sản phẩm
+    public void setGiaSP(double giaSP) {
+        this.giaSP = giaSP;
     }
-
-    // Phương thức get
-    public String getId() {
-        return id; // Trả về ID sản phẩm
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
     }
-
-    public String getTen() {
-        return ten; // Trả về tên sản phẩm
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
-
-    public double getGia() {
-        return gia; // Trả về giá sản phẩm
+    public double getGiaSP() {
+        return giaSP;
     }
-
-    // Phương thức trừu tượng để hiển thị thông tin sản phẩm
-    public abstract void hienThiThongTin();
+    public String getMaSP() {
+        return maSP;
+    }
+    public String getTenSP() {
+        return tenSP;
+    }
 
     @Override
-    public abstract String toString();
+    public String toString() {
+        return null;
+    }
+
 }
