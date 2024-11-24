@@ -14,9 +14,46 @@ public class chitietHH  {
         this.soLuong = soLuong;
     }
 
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    } 
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
     public void nhap() {
         Scanner sc = new Scanner(System.in);
-        hh.nhapHangHoa();
-        System.out.print("Nhap so luong nhap: ");
+        System.out.print ("Nhap ma hang hoa muon them: ");
+        String ma = sc.nextLine();
+
+        DS_HH ds = new DS_HH();
+        ds.docfile();
+
+        if (ds.searchHH(ma) == null) {
+            int loai = ds.chonLoaiHH();
+            if (loai == 1){
+                hh = new noiThat();
+            }
+            else {
+                hh = new thucPham();
+            }
+            hh.nhapHangHoa();
+            soLuong = hh.getSoLuong();
+            ds.them(hh);
+        }
+        else {
+            hh = ds.searchHH(ma);
+            System.out.print ("Nhap so luong nhap: ");
+            soLuong = sc.nextInt();
+            hh.setSoLuong(hh.getSoLuong() + soLuong);
+        }
+
+        ds.ghifile();
+    }
+
+    public void xuat (){
+        hh.xuatHangHoa();
+        System.out.println("So luong nhap: " + soLuong);
     }
 }

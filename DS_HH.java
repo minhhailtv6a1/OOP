@@ -77,6 +77,11 @@ public class DS_HH implements danhSach {
         soLuong++;
     }
 
+    public void them (hangHoa hh) {
+        ds.add(hh);
+        soLuong++;
+    }
+
     public void xoa () {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap ma hang can xoa: ");
