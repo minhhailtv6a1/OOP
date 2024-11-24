@@ -2,3 +2,5 @@
 2,tp01,sua TH true milk,10,15000.0,jkl,3
 1,nt02,ly,5,10000.0,oop,0,2 cai bi me
 2,tp02,banh,15,7000.0,web,1
+1,nt03,guong,2,10000.0,abc,6,on
+1,nt04,tu,3,10000.0,txt,12,2 cai bi hu

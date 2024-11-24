@@ -36,12 +36,7 @@ public class noiThat extends hangHoa {
     }
     @Override
     public void xuatHangHoa() {
-        System.out.println("Ma noi that: " + this.getMaHang());
-        System.out.println("Ten noi that: " + this.getTenHang());
-        System.out.println("So luong: " + this.getSoLuong());
-        System.out.println("Gia noi that: " + this.getGiaHH());
-        System.out.println("Noi san xuat: " + this.getNoiSX());
-        System.out.println("Han bao hanh: " + hanBH);
+        super.xuatHangHoa();
         System.out.println("Thanh tien: " + this.tinhThanhTien());
         System.out.println("Tinh trang: " + tinhTrang);
 

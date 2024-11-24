@@ -23,11 +23,7 @@ public class thucPham extends hangHoa{
     
     @Override
     public void xuatHangHoa() {
-        System.out.println("- Ma thuc phan: " + this.getMaHang());
-        System.out.println("- Ten thuc pham: " + this.getTenHang());
-        System.out.println("- So luong: " + this.getSoLuong());
-        System.out.println("- Gia thuc pham: " + this.getGiaHH());
-        System.out.println("- Noi san xuat: " + this.getNoiSX());
+        super.xuatHangHoa();
         System.out.println("- Han su dung: " + hanSD);
         System.out.println("- Thanh tien: " + this.tinhThanhTien());
     }

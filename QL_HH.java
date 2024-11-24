@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class QL_HH {
     DS_HH ds = new DS_HH();
     public void menu() {
-        System.out.println("==============MENU==============");
+        System.out.println("\n==============MENU==============");
         System.out.println("1. Nhap danh sach hang hoa");
         System.out.println("2. Xuat danh sach hang hoa");
         System.out.println("3. Tim kiem hang hoa");
@@ -16,15 +16,7 @@ public class QL_HH {
     public void run(){
         Scanner sc = new Scanner(System.in);
         int choice;
-        // System.out.println("1. Danh sach noi that");
-        // System.out.println("2. Danh sach thuc pham");
-        // System.out.println("3. Thoat");
-        // System.out.print("Nhap loai danh sach: ");
-        // int loai = sc.nextInt();
-        // ds.setLoai(loai);
-        // if (loai == 3)
-        //     return;
-        ds.readFile();
+        ds.docfile();
         do {
             menu();
             System.out.println("Nhap lua chon: ");
@@ -38,13 +30,12 @@ public class QL_HH {
                     ds.xuat();
                     break;
                 case 3:
-                    hangHoa hh = ds.searchHH();
-                    hh.xuatHangHoa();
+                    ds.timKiem();
                     break;
                 case 4:
                     int choiceAdd;
                     do{
-                        ds.addHH();
+                        ds.them();
                         System.out.println("1. Tiep tuc them hang hoa");
                         System.out.println("2. Thoat");
                         System.out.print("Nhap lua chon: ");
@@ -59,7 +50,7 @@ public class QL_HH {
                 case 5:
                     int choiceRemove;
                     do{
-                        ds.removeHH();
+                        ds.xoa();
                         System.out.println("1. Tiep tuc xoa hang hoa");
                         System.out.println("2. Thoat");
                         System.out.print("Nhap lua chon: ");
@@ -72,22 +63,21 @@ public class QL_HH {
                     while (choiceRemove != 2);
                     break;
                 case 6:
-                    ds.suaHangHoa();
+                    ds.sua();
                     break;
                 case 7: 
-                    ds.readFile();
+                    ds.docfile();
                     break;
                 case 8:
-                    ds.writeFile();
+                    ds.ghifile();
                     break;
                 case 9:
-                    ds.writeFile();
+                    ds.ghifile();
                     System.out.println("Ket thuc chuong trinh");
                     break;
                 default:
                     System.out.println("Nhap sai, moi nhap lai");
-                    break;
-                    
+                    break;      
             }
 
         } while (choice != 9);

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-public class DS_HH {
+public class DS_HH implements danhSach {
     int soLuong;
     ArrayList<hangHoa> ds;
     public DS_HH() {
@@ -31,6 +31,7 @@ public class DS_HH {
         return loai;
     }
 
+    @Override
     public void nhap() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong hang hoa: ");
@@ -49,6 +50,8 @@ public class DS_HH {
         }
         soLuong += count;
     }
+
+    @Override
     public void xuat() {
         System.out.println();
         // System.out.println(ds.size());
@@ -57,7 +60,9 @@ public class DS_HH {
         }
         System.out.println();
     }
-    public void addHH() {
+
+    @Override
+    public void them() {
         Scanner sc = new Scanner(System.in);
         hangHoa hh;
         int loai = chonLoaiHH();
@@ -72,7 +77,7 @@ public class DS_HH {
         soLuong++;
     }
 
-    public void removeHH () {
+    public void xoa () {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap ma hang can xoa: ");
         String maHang = sc.nextLine();
@@ -85,13 +90,21 @@ public class DS_HH {
         }
         System.out.println("Khong tim thay hang co ma: " + maHang);
     }
-
-    public hangHoa searchHH () {
+    @Override
+    public void timKiem() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap ma hang can tim: ");
         String maHang = sc.nextLine();
-        return searchHH(maHang);
+        hangHoa hh = searchHH(maHang);
+        if (hh != null) {
+            hh.xuatHangHoa();
+        }
+        else {
+            System.out.println("Khong tim thay hang co ma: " + maHang);
+        }
+        
     }
+
     public hangHoa searchHH (String maHang) {
         for (int i = 0; i < soLuong; i++) {
             if (ds.get(i).getMaHang().equals(maHang)) {
@@ -158,7 +171,8 @@ public class DS_HH {
         hh.setTinhTrang(tinhTrang);
     }
 
-    public void suaHangHoa() {
+    @Override
+    public void sua() {
         Scanner sc = new Scanner (System.in);
         System.out.print( "Nhap ma hang can sua: ");
         String maHang = sc.nextLine();
@@ -256,7 +270,9 @@ public class DS_HH {
         
 
     }
-    public void readFile() {
+
+    @Override
+    public void docfile() {
         try {
             BufferedReader input = new BufferedReader (new FileReader("DS_HH.txt"));
             String line = input.readLine();
@@ -283,7 +299,8 @@ public class DS_HH {
         }
         
     }
-    public void writeFile() {
+    @Override
+    public void ghifile() {
         try {
             FileWriter output = new FileWriter("DS_HH.txt");
             for (hangHoa hh : ds) {
@@ -302,4 +319,5 @@ public class DS_HH {
             e.printStackTrace();
         }
     }
+    
 }
