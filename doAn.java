@@ -1,41 +1,53 @@
+import java.util.Scanner;
+
 public class doAn extends sanPham {
-    private String loai; // Loại món ăn
+    private String nguyenLieu;
+    private String loaiDoAn;
 
-    // Hàm thiết lập không tham số
-    public doAn() {
-        super(); // Gọi hàm thiết lập không tham số của lớp cha sanPham()
-        this.loai = "Unknown"; // Thiết lập giá trị mặc định cho loại món ăn
+    public doAn(){
+        super();
+        nguyenLieu="";
+        loaiDoAn="";
     }
 
-    // Hàm thiết lập có tham số
-    public doAn(String id, String ten, double gia, String loai) {
-        super(id, ten, gia); // Gọi hàm thiết lập của lớp cha với id, ten, gia
-        this.loai = loai; // Thiết lập loại món ăn
-    }
-
-    // Phương thức set
-    public void setLoai(String loai) {
-        this.loai = loai; // Thiết lập loại món ăn
-    }
-
-    // Phương thức get
-    public String getLoai() {
-        return loai; // Trả về loại món ăn
+    public doAn(String maSP, String tenSP, double giaSP,String nguyenLieu,String loaiDoAn){
+        super(maSP, tenSP, giaSP);
+        this.nguyenLieu=nguyenLieu;
+        this.loaiDoAn=loaiDoAn;
     }
 
     @Override
-    public void hienThiThongTin() { // Hiển thị thông tin món ăn
-        System.out.printf("%-10s %-10s %-40s %-15s %-10s%n",
-                "Do An",
-                "ID: " + getId(),
-                "Ten: " + getTen(),
-                "Loai: " + loai,
-                "Gia: " + getGia());
+    public void nhap() {
+        Scanner sc = new Scanner(System.in);
+        super.nhap();
+        System.out.print("Nhap nguyen lieu: ");
+        this.nguyenLieu = sc.nextLine();
+        System.out.print("Nhap loai do an: ");
+        this.loaiDoAn = sc.nextLine();
     }
+
+    @Override
+    public void xuat() {
+        super.xuat();
+        System.out.println("Nguyen lieu: " + nguyenLieu);
+        System.out.println("Loai do an: " + loaiDoAn);
+    }
+    public void setLoaiDoAn(String loaiDoAn) {
+        this.loaiDoAn = loaiDoAn;
+    }
+    public void setNguyenLieu(String nguyenLieu) {
+        this.nguyenLieu = nguyenLieu;
+    }
+    public String getLoaiDoAn() {
+        return loaiDoAn;
+    }
+    public String getNguyenLieu() {
+        return nguyenLieu;
+    }    
 
     @Override
     public String toString() {
-        return "doAn," + id + "," + ten + "," + gia + "," + loai;
+    return  getMaSP() + "," + getTenSP() + "," + getGiaSP() + "," + nguyenLieu + "," + loaiDoAn;
     }
 
 }
