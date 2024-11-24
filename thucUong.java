@@ -1,40 +1,63 @@
+import java.util.Scanner;
 public class thucUong extends sanPham {
-    private String size; // Kích thước đồ uống
-
-    // Hàm thiết lập không tham số
-    public thucUong() {
-        super(); // Gọi hàm thiết lập không tham số của lớp cha sanPham()
-        this.size = "Unknown"; // Thiết lập giá trị mặc định cho kích thước
+    private String size;
+    private float luongDa;
+    private float nongDoDuong;
+    public thucUong(){
+        super();
+        size="";
+        luongDa=0;
+        nongDoDuong=0;
     }
-
-    // Hàm thiết lập có tham số
-    public thucUong(String id, String ten, double gia, String size) {
-        super(id, ten, gia); // Gọi hàm thiết lập của lớp cha với id, ten, gia
-        this.size = size; // Thiết lập kích thước
-    }
-
-    // Phương thức set
-    public void setSize(String size) {
-        this.size = size; // Thiết lập kích thước đồ uống
-    }
-
-    // Phương thức get
-    public String getSize() {
-        return size; // Trả về kích thước đồ uống
+    public thucUong(String maSP, String tenSP, double giaSP,String size,float luongDa, float nongDoDuong) {
+        super(maSP, tenSP, giaSP);
+        this.size=size;
+        this.luongDa=luongDa;
+        this.nongDoDuong=nongDoDuong;
     }
 
     @Override
-    public void hienThiThongTin() { // Hiển thị thông tin đồ uống với format đều các cột
-        System.out.printf("%-10s %-10s %-40s %-15s %-10s%n",
-                "Thuc Uong",
-                "ID: " + getId(),
-                "Ten: " + getTen(),
-                "Size: " + size,
-                "Gia: " + getGia());
+    public void nhap() {
+        Scanner sc = new Scanner(System.in);
+        super.nhap();
+        System.out.print("Nhap size: ");
+        this.size = sc.nextLine();
+        System.out.print("Nhap luong da: ");
+        this.luongDa = Float.parseFloat(sc.nextLine());
+        System.out.print("Nhap nong do duong: ");
+        this.nongDoDuong = Float.parseFloat(sc.nextLine());
+    }
+
+    @Override
+    public void xuat() {
+        super.xuat();
+        System.out.println("Size: " + this.size);
+        System.out.println("Luong da: " + this.luongDa);
+        System.out.println("Nong do duong: " + this.nongDoDuong);
+    }
+
+    public void setLuongDa(float luongDa) {
+        this.luongDa = luongDa;
+    }
+    public void setNongDoDuong(float nongDoDuong) {
+        this.nongDoDuong = nongDoDuong;
+    }
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public String getSize() {
+        return size;
+    }
+    public float getNongDoDuong() {
+        return nongDoDuong;
+    }
+    public float getLuongDa() {
+        return luongDa;
     }
 
     @Override
     public String toString() {
-        return "thucUong," + id + "," + ten + "," + gia + "," + size;
+        return  getMaSP() + "," + getTenSP() + "," + getGiaSP() + "," + size + "," + luongDa + "," + nongDoDuong;
     }
+
 }
