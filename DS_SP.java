@@ -98,26 +98,38 @@ public class DS_SP {
     //Thêm mới sản phẩm
     public void them() {
         Scanner sc = new Scanner(System.in);
-        sanPham sp;
-    
-        System.out.println("Nhap thong tin san pham muon them: ");
+    sanPham sp;
+    int loai = 0;
+
+    System.out.println("Nhap thong tin san pham muon them: ");
+
+    // Vòng lặp để bắt người dùng nhập đúng lựa chọn
+    do {
         System.out.print("Nhap loai san pham (1: Do an, 2: Thuc uong): ");
-        int loai = Integer.parseInt(sc.nextLine());
-    
-        if (loai == 1) {
-                sp = new doAn(); // Tạo đối tượng doAn
-            } else if (loai == 2) {
-                sp = new thucUong(); // Tạo đối tượng thucUong
-            } else {
-                System.out.println("Loai san pham khong hop le! Vui long chon lai.");
-                continue; // Bỏ qua vòng lặp này
+        try {
+            loai = Integer.parseInt(sc.nextLine());
+            if (loai != 1 && loai != 2) {
+                System.out.println("Lua chon khong hop le. Vui long nhap 1 hoac 2.");
             }
-    
-        sp.nhap(); // Nhập thông tin sản phẩm
-        danhSachSanPham.add(sp); // Thêm sản phẩm vào danh sách
-        System.out.println("San pham da duoc them thanh cong!");
-    
-        ghiFile(); // Ghi dữ liệu vào file sau khi thêm
+        } catch (NumberFormatException e) {
+            System.out.println("Vui long nhap so nguyen (1 hoac 2).");
+        }
+    } while (loai != 1 && loai != 2);
+
+    // Tạo đối tượng sản phẩm dựa trên lựa chọn
+    if (loai == 1) {
+        sp = new doAn(); // Tạo đối tượng doAn
+    } else {
+        sp = new thucUong(); // Tạo đối tượng thucUong
+    }
+
+    // Nhập thông tin chi tiết cho sản phẩm
+    sp.nhap();
+    danhSachSanPham.add(sp); // Thêm sản phẩm vào danh sách
+    System.out.println("San pham da duoc them thanh cong!");
+
+    // Ghi dữ liệu vào file sau khi thêm
+    ghiFile();
     }
     
 
