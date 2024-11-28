@@ -30,26 +30,27 @@ public class QL_NV {
                 case 6: ds_nv.xoa();
                     break;
 
-                case 7: {
-                    System.out.println("------------------------------------------------");
-                    System.out.println("\tTAI DANH SACH NHAN VIEN THANH CONG");
-                    ds_nv.docFile();
-                }
-                    break;
+                // case 7: {
+                //     System.out.println("------------------------------------------------");
+                //     System.out.println("\tTAI DANH SACH NHAN VIEN THANH CONG");
+                //     ds_nv.docFile();
+                // }
+                //     break;
 
-                case 8: {
-                    System.out.println("------------------------------------------");
-                    System.out.println("\tLUU DANH SACH NHAN VIEN THANH CONG");
-                    ds_nv.ghiFile();
-                }
-                    break;
+                // case 8: {
+                //     System.out.println("------------------------------------------");
+                //     System.out.println("\tLUU DANH SACH NHAN VIEN THANH CONG");
+                //     ds_nv.ghiFile();
+                // }
+                //     break;
 
-                case 9: ;
+                case 7: 
+                ds_nv.ghiFile();
                     break;
                 default: System.out.println("Nhap sai chuc nang. Hay nhap lai!");
                     break;
             }
-            if(chon==9) break;
+            if(chon==7) break;
         }
     }
 
@@ -63,8 +64,8 @@ public class QL_NV {
         System.out.println("4. Them nhan vien");
         System.out.println("5. Sua nhan vien");
         System.out.println("6. Xoa nhan vien");
-        System.out.println("7. Tai danh sach nhan vien");
-        System.out.println("8. Luu danh sach nhan vien");
-        System.out.println("9. Thoat");
+        // System.out.println("7. Tai danh sach nhan vien");
+        // System.out.println("8. Luu danh sach nhan vien");
+        System.out.println("7. Thoat");
     }
 }

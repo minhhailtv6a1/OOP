@@ -16,8 +16,15 @@ public class chiTietSP {
     public void nhap(){
         DS_SP  ds_sp = new DS_SP();
         ds_sp.docFile();
-        System.out.print("Nhap ma san pham: ");
-        sp=ds_sp.timMa();
+        
+        while(true){
+            System.out.print("Nhap ma san pham: ");
+            sp=ds_sp.timMa();
+            if(sp.getMaSP() != "") break;
+
+            ///Nếu nó bằng rỗng
+            System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham!");
+        }
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap so luong: ");
         this.soLuong=sc.nextInt();

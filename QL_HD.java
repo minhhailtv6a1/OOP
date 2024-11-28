@@ -32,18 +32,19 @@ public class QL_HD {
             case 6:
                 ds_hd.xoa();
                 break;
+            // case 7:
+            //     ds_hd.docFile();
+            //     break;  
+            // case 8:
+            //     ds_hd.ghiFile();
+            //     break;  
             case 7:
-                ds_hd.docFile();
-                break;  
-            case 8:
                 ds_hd.ghiFile();
-                break;  
-            case 9:
                 break;
             default: System.out.println("Nhap sai chuc nang. Hay nhap lai!");
                 break;
             }
-            if(chon2==9)  break;
+            if(chon2==7)  break;
         }
         }
 
@@ -54,9 +55,9 @@ public class QL_HD {
         System.out.println("4. Them hoa don");
         System.out.println("5. Sua hoa don");
         System.out.println("6. Xoa hoa don");
-        System.out.println("7. Tai hoa don");
-        System.out.println("8. Luu hoa don");
-        System.out.println("9. Thoat");
+        // System.out.println("7. Tai hoa don");
+        // System.out.println("8. Luu hoa don");
+        System.out.println("7. Thoat");
     }
 }
 

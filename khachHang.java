@@ -43,11 +43,25 @@ public class khachHang extends nguoi {
     @Override
     public void nhap() {
         // TODO Auto-generated method stub
+        DS_KH ds_KH = new DS_KH();
+        ds_KH.docFile();
         Scanner sc=new Scanner(System.in);
-        System.out.println("Nhap ma KH: ");
-        this.maKhach=sc.nextLine();
+        while(true){
+            System.out.print("Nhap ma KH: ");
+            String ma = sc.nextLine();
+            khachHang tmp = ds_KH.timMa(ma);
+            ///Nếu mã khách không tồn tại thì cho nhập
+            if(tmp.getMaKhach() == ""){
+                this.maKhach = ma;
+                break;
+            }
+
+            ///Nếu mã khách tồn tại thì thông báo cho nhập lại
+            System.out.println("Ma khach hang da ton tai. Hay nhap lai ma khach hang!");
+        }
+        
         super.nhap();
-        System.out.println("Nhap diem tich luy: ");
+        System.out.print("Nhap diem tich luy: ");
         this.diemTichLuy=sc.nextInt();
     }
 }

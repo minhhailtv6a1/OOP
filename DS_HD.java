@@ -57,6 +57,7 @@ public class DS_HD implements danhSach {
             tmp.nhap();
             hd.add(tmp);
             this.n ++;
+            this.ghiFile();
         }
     }
 
@@ -81,13 +82,17 @@ public class DS_HD implements danhSach {
             return;
         }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de tim: ");
-        String ma=sc.nextLine();
-        for(int i=0;i<n;i++)
-            if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.get(i).xuat();
-                break;
-            }
+        while(true){
+            System.out.print("Nhap ma de tim: ");
+            String ma=sc.nextLine();
+            for(int i=0;i<n;i++)
+                if(hd.get(i).getMaHoaDon().equals(ma)){
+                    hd.get(i).xuat();
+                    return;
+                }
+            ///Nếu tìm không có
+            System.out.println("Khong ton tai hoa don. Hay nhap lai ma hoa don.");
+        }
     }
 
     public void them(){
@@ -104,6 +109,7 @@ public class DS_HD implements danhSach {
     public void them(hoaDon a){
         hd.add(a);
         n++;
+        this.ghiFile();
     }
 
     public void xoa(){
@@ -114,14 +120,29 @@ public class DS_HD implements danhSach {
             return;
         }      
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de xoa: ");
-        String ma=sc.nextLine();
-        for(int i=0;i<n;i++)
-            if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.remove(i);
-                n--;
-                break;
-            }
+        hoaDon tmp;
+        while(true){
+            System.out.print("Nhap ma de xoa: ");
+            String ma=sc.nextLine();
+            tmp = timMa(ma);
+            if(tmp != null) break;
+
+            System.out.println("Khong ton tai ma hoa don. Hay nhap lai ma hoa don.");
+        }
+
+        int choice;
+        while(true){
+            System.out.print("Ban co chac chac muon xoa hoa don nay? (Nhap 1 de xoa, 2 de huy): ");
+            choice = Integer.parseInt(sc.nextLine());
+            if(choice == 1 || choice == 2) break;
+            
+            System.out.println("Nhap sai. Hay nhap lai.");
+        }
+        if(choice == 1){
+            hd.remove(tmp);
+            n--;
+            this.ghiFile();
+        }
     }
 
     public hoaDon timMa(String ma){
@@ -140,12 +161,19 @@ public class DS_HD implements danhSach {
             return;
         }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma muon sua: ");
-        String ma = sc.nextLine();
-        hoaDon tmp = timMa(ma);
-        int index = hd.indexOf(tmp);
-        tmp.nhap();
-        hd.set(index, tmp);
+
+        hoaDon tmp;
+        while(true){
+            System.out.print("Nhap ma muon sua: ");
+            String ma = sc.nextLine();
+            tmp = timMa(ma);
+            if(tmp != null) break;
+
+            System.out.println("Khong ton tai hoa don. Hay nhap lai ma hoa don.");
+        }
+        ///Nhập lại thông tin hóa đơn muốn sửa
+        hd.get(hd.indexOf(tmp)).nhap();
+        this.ghiFile();
     }
 
     public void ghiFile(){
@@ -168,9 +196,9 @@ public class DS_HD implements danhSach {
                 else{
                     hoaDonNhapHang tmp = (hoaDonNhapHang)hd.get(i);
                     line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
-                    line += tmp.getNv().getMaNhanVien() + ",";
-                    for(hangHoa x: tmp.getHh()){
-                        line += "," + x.getMaHang();
+                    line += tmp.getNv().getMaNhanVien();
+                    for(chitietHH x: tmp.getHh()){
+                        line += "," + x.getHh().getMaHang() + "," + x.getSoLuong();
                     }
                     line += "\n";
                 }
@@ -207,20 +235,27 @@ public class DS_HD implements danhSach {
                 
                 //Đọc file ds_NV
                 DS_NV ds_NV = new DS_NV();
-                ds_NV.docFile();;
+                ds_NV.docFile();
                 tmp.setNv(ds_NV.timMa(arr[5]));
 
                 //Đọc file ds_SP
                 DS_SP ds_SP = new DS_SP();
                 ds_SP.docFile();
                 
-                chiTietSP sp1=new chiTietSP();
-                for(int i=6;i<arr.length-1;i+=2){
+
+                ///Lấy chi tiết sp vừa đọc add là ArrayList chiTietSPs
+                ArrayList<chiTietSP> chiTietSPs = new ArrayList<>();
+                for(int i=6;i<arr.length; i = i + 2){
                     //Cho setSP = SP ma tim duoc trong ds_SP bang ma
+                    ///Chi tiết SP để đọc từ file lên
+                    chiTietSP sp1=new chiTietSP();
                     sp1.setSP(ds_SP.timMa(arr[i]));
                     sp1.setSoLuong(Integer.parseInt(arr[i+1]));
-                    tmp.getDs_sp().add(sp1);
+                    chiTietSPs.add(sp1);
                 }
+                ///Set ds_sp của hóa đơn tmp = ArrayList chiTietSPs
+                tmp.setDs_sp(chiTietSPs);
+                
                 hd.add(tmp);
             }
 
@@ -240,17 +275,18 @@ public class DS_HD implements danhSach {
                 //Đọc file ds_HH
                 DS_HH ds_HH = new DS_HH();
                 ds_HH.docFile();
-                hangHoa hh_tmp;
-                for(int i=5;i<arr.length;i++){
-                    if(arr[i].contains("tp")) hh_tmp = new thucPham();
-                    else hh_tmp = new noiThat();
 
-                    hh_tmp = ds_HH.searchHH(arr[i]);
-                    // hh_tmp.xuatHangHoa();
-                    tmp.getHh().add(hh_tmp);
-                    tmp.setN(tmp.getHh().size());
-                    // System.out.println(tmp.getHh());
+                ArrayList<chitietHH> chitietHHs = new ArrayList<>();
+                for(int i=5; i<arr.length; i = i + 2){
+                    ///Đọc chi tiết hàng hóa từ file
+                    chitietHH hh1 = new chitietHH();
+                    hh1.setHh(ds_HH.searchHH(arr[i]));
+                    hh1.setSoLuong(Integer.parseInt(arr[i+1]));
+                    ///Thêm chi tiết vừa đọc vào ArrayList chitietHHs
+                    chitietHHs.add(hh1);
                 }
+                tmp.setHh(chitietHHs);
+                tmp.setN(tmp.getHh().size());
                 hd.add(tmp);
                 // System.out.println(hd.size());
             }

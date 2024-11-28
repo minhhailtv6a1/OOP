@@ -20,8 +20,16 @@ import java.util.Scanner;
 
     public void nhap(){
         Scanner sc=new Scanner(System.in);
-        System.out.print("Ma san pham: ");
-        this.maSP=sc.nextLine();
+        while(true){
+            System.out.print("Ma san pham: ");
+            this.maSP=sc.nextLine();
+            DS_SP ds_SP = new DS_SP();
+            ds_SP.docFile();
+            ///Nếu tìm không có sản phẩm có mã trùng
+            if(ds_SP.timMa(this.maSP).getMaSP() == "") break;
+
+            System.out.println("Ma san pham da ton tai. Hay nhap lai ma san pham.");
+        }
         System.out.print("Ten san pham: ");
         this.tenSP=sc.nextLine();
         System.out.print("Gia san pham: ");

@@ -34,6 +34,12 @@ public class thucPham extends hangHoa{
         System.out.print("Nhap han su dung: ");
         hanSD = sc.nextInt();   
     }
+    public void nhapHangHoa(String ma) {
+        Scanner sc= new Scanner(System.in);
+        super.nhapHangHoa(ma);
+        System.out.print("Nhap han su dung: ");
+        hanSD = sc.nextInt();   
+    }
 }
 
 

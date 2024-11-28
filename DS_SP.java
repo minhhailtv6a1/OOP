@@ -127,8 +127,16 @@ public class DS_SP implements danhSach{
 
     public void sua() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ID san pham can sua: ");
-        String id = sc.nextLine();
+        String id;
+        ///Kiểm tra id nhập phải tồn tại mới sửa
+        while(true){
+            System.out.print("Nhap ID san pham can sua: ");
+            id = sc.nextLine();
+            ///Nếu tìm thấy sản phẩm có id vừa nhập
+            if(timMa(id).getMaSP() != "") break;
+
+            System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham.");
+        }
         for (sanPham sp : danhSachSanPham) {
             if (sp.getMaSP().equals(id)) {
                 System.out.println("Thong tin san pham hien tai:");
@@ -224,8 +232,16 @@ public class DS_SP implements danhSach{
     // Xóa sản phẩm
     public void xoa() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ID san pham can xoa: ");
-        String id = sc.nextLine();
+        String id;
+        
+        ///Kiểm tra id nhập phải tồn tại mới sửa
+        while(true){
+            System.out.print("Nhap ID san pham can xoa: ");
+            id = sc.nextLine();
+            if(timMa(id).getMaSP() != "") break;
+
+            System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham.");
+        }
         
         for (int i = 0; i < danhSachSanPham.size(); i++) {
             if (danhSachSanPham.get(i).getMaSP().equals(id)) {
@@ -256,15 +272,21 @@ public class DS_SP implements danhSach{
     // Tìm kiếm sản phẩm
     public void timKiem() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ID san pham can tim: ");
-        String id = sc.nextLine();
+        String id;
+        ///Kiểm tra id nhập phải tồn tại mới tìm kiếm
+        while(true){
+            System.out.print("Nhap ID san pham can tim: ");
+            id = sc.nextLine();
+            if(timMa(id).getMaSP() != "") break;
+
+            System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham.");
+        }
         for (sanPham sp : danhSachSanPham) {
             if (sp.getMaSP().equals(id)) {
                 sp.xuat();
                 return;
             }
         }
-        System.out.println("Khong tim thay san pham voi ID: " + id);
     }
     
 

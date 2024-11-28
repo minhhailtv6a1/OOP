@@ -29,17 +29,30 @@ public class nhanVien extends nguoi {
     public void nhap() {
         // TODO Auto-generated method stub
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap ma NV:");
-        this.maNhanVien=sc.nextLine();
+        DS_NV ds_NV = new DS_NV();
+        ds_NV.docFile();
+        while(true){
+            System.out.print("Nhap ma NV: ");
+            String ma=sc.nextLine();
+            ///Nếu không tìm thấy mã cho phép nhập
+            if(ds_NV.timMa(ma).getMaNhanVien() == ""){ 
+                this.maNhanVien = ma;
+                break;
+            }
+            
+            ///Nếu tồn tại mã thì bắt nhập lại
+            System.out.println("Ma nhan vien da ton tai. Hay nhap lai ma nhan vien.");
+        }
+
         super.nhap();
-        System.out.println("Nhap vi tri: ");
+        System.out.print("Nhap vi tri: ");
         this.viTri=sc.nextLine();
-        System.out.println("Nhap ca lam:");
+        System.out.print("Nhap ca lam: ");
         this.caLam=sc.nextInt();
         sc.nextLine();        
-        System.out.println("Nhap so gio: ");
+        System.out.print("Nhap so gio: ");
         this.soGio=sc.nextInt();
-        System.out.println("Nhap luong co ban:");
+        System.out.print("Nhap luong co ban: ");
         this.luongCoBan=sc.nextDouble();
     }
 
@@ -52,7 +65,7 @@ public class nhanVien extends nguoi {
         System.out.println("Vi tri: "+ this.viTri);
         System.out.println("Ca lam: "+ this.caLam);
         System.out.println("So gio: "+this.soGio);
-        System.out.println("Luong co ban: " + (int)this.luongCoBan + "d/h");
+        System.out.println("Luong co ban: " + (int)this.luongCoBan + " vnd/h");
     }
 
     public double tinhLuong(){

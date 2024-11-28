@@ -34,6 +34,15 @@ public class noiThat extends hangHoa {
         sc.nextLine();
         tinhTrang = sc.nextLine();
     }
+    public void nhapHangHoa(String ma) {
+        Scanner sc = new Scanner(System.in);
+        super.nhapHangHoa(ma);
+        System.out.print("Nhap han bao hanh: ");
+        hanBH = sc.nextInt();
+        System.out.print("Nhap tinh trang: ");
+        sc.nextLine();
+        tinhTrang = sc.nextLine();
+    }
     @Override
     public void xuatHangHoa() {
         super.xuatHangHoa();

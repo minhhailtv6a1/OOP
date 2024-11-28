@@ -3,7 +3,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 public class hoaDonNhapHang extends hoaDon {
-    private ArrayList<hangHoa> hh;
+    private ArrayList<chitietHH> hh;
     private int n;
 
     public hoaDonNhapHang(){
@@ -11,7 +11,7 @@ public class hoaDonNhapHang extends hoaDon {
         n = 0;
     }
 
-    public hoaDonNhapHang(Calendar ngay, String maHoaDon, nhanVien nv, ArrayList<hangHoa> hh, int n){
+    public hoaDonNhapHang(Calendar ngay, String maHoaDon, nhanVien nv, ArrayList<chitietHH> hh, int n){
         super(ngay, maHoaDon, nv);
         this.hh = hh;
         this.n = n;
@@ -21,8 +21,16 @@ public class hoaDonNhapHang extends hoaDon {
     public void nhap() {
         // TODO Auto-generated method stub
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma hoa don: ");
-        this.setMaHoaDon(sc.nextLine());
+        DS_HD ds_HD = new DS_HD();
+        ds_HD.docFile();
+        while(true){
+            System.out.print("Nhap ma hoa don: ");
+            this.setMaHoaDon(sc.nextLine());
+            if(ds_HD.timMa(this.getMaHoaDon()) == null) break;
+
+            System.out.println("Ma hoa don da ton tai. Hay nhap lai ma hoa don.");
+        }
+
         while (true){
             System.out.println("Nhap ngay (dd/mm/yyyy): ");
             int x = sc.nextInt(), y = sc.nextInt(), z = sc.nextInt();
@@ -74,8 +82,15 @@ public class hoaDonNhapHang extends hoaDon {
         ds_nv.docFile();
 
         //Nhập mã nhân viên để tìm nhân viên trong dsNV rồi ghi vào hóa đơn
-        System.out.print("Nhap ma nhan vien: ");
-        this.setNv(ds_nv.timMa());
+        while (true)
+        {
+            System.out.print("Nhap ma nhan vien: ");
+            this.setNv(ds_nv.timMa());
+            if(this.getNv().getMaNhanVien() != "") break;
+
+            ///Nếu tìm ko có nhân viên
+            System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien!");
+        }
 
         System.out.print("Nhap so luong hang hoa: ");
         this.n = sc.nextInt();
@@ -85,10 +100,12 @@ public class hoaDonNhapHang extends hoaDon {
         DS_HH timDS = new DS_HH();
         timDS.docFile();
         for(int i=0; i<n;i++){
-            System.out.print("Nhap ma hang hoa them vao hoa don: ");
-            String ma = sc.nextLine();
-            hangHoa tmp = timDS.searchHH(ma);
+            // System.out.print("Nhap ma hang hoa them vao hoa don: ");
+            // String ma = sc.nextLine();
+            chitietHH tmp = new chitietHH();
+            tmp.nhap();
             hh.add(tmp);
+            // this.n ++;
         }
     }
 
@@ -97,12 +114,12 @@ public class hoaDonNhapHang extends hoaDon {
         // TODO Auto-generated method stub
         System.out.println("- Ma hoa don: " + this.getMaHoaDon());
         System.out.println("- Ngay: " + this.getNgay().get(Calendar.DATE) + "/" + this.getNgay().get(Calendar.MONTH) + "/" + this.getNgay().get(Calendar.YEAR));
-        System.out.println("Ten nhan vien: " + this.getNv().getHoTen());
+        System.out.println("- Ten nhan vien: " + this.getNv().getHoTen());
         System.out.println("- Cac hang hoa:");
         for(int i=0; i<n;i++){
-            System.out.println("+ Hang hoa " + (i + 1) );
-            hh.get(i).xuatHangHoa();
+            hh.get(i).xuat();
         }
+        System.out.println("- Tong hoa don: " + (int)this.tongHoaDon() + " vnd");
     }
 
     @Override
@@ -114,13 +131,13 @@ public class hoaDonNhapHang extends hoaDon {
         }
         return tong;
     }
-    public ArrayList<hangHoa> getHh() {
+    public ArrayList<chitietHH> getHh() {
         return hh;
     }
     public int getN() {
         return n;
     }
-    public void setHh(ArrayList<hangHoa> hh) {
+    public void setHh(ArrayList<chitietHH> hh) {
         this.hh = hh;
     }
     public void setN(int n) {
