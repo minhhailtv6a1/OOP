@@ -1,42 +1,34 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Calendar;
+import java.util.Scanner;
 
-public class hoaDonKhach extends hoaDon{
-    private khachHang kh;
-    private ArrayList<chiTietSP> ds_sp; //new ArrayList<chiTietSP>()
+public class hoaDonNhapHang extends hoaDon {
+    private ArrayList<chitietHH> hh;
     private int n;
 
-    public hoaDonKhach(){
-        this.kh=new khachHang();
-        this.ds_sp=new ArrayList<chiTietSP>();
+    public hoaDonNhapHang(){
+        hh = new ArrayList<>();
+        n = 0;
     }
 
-    public hoaDonKhach(Calendar ngay, String maHoaDon, nhanVien nv, khachHang kh, ArrayList<chiTietSP> ds_sp, int n){
+    public hoaDonNhapHang(Calendar ngay, String maHoaDon, nhanVien nv, ArrayList<chitietHH> hh, int n){
         super(ngay, maHoaDon, nv);
-        this.kh=kh;
-        this.ds_sp=ds_sp;
+        this.hh = hh;
         this.n = n;
     }
 
-    public void nhap(){
-        //Khi hoan thien chi nhap vao maKH để tìm ra khách hàng
-        Scanner sc=new Scanner(System.in);
+    @Override
+    public void nhap() {
+        // TODO Auto-generated method stub
+        Scanner sc = new Scanner(System.in);
         DS_HD ds_HD = new DS_HD();
         ds_HD.docFile();
         while(true){
             System.out.print("Nhap ma hoa don: ");
-            String ma = sc.nextLine();
-            hoaDon tmp = ds_HD.timMa(ma);
-            ///Nếu mã hóa đơn ko tồn tại thì cho phép hóa đơn lấy mã đó
-            if(tmp == null) 
-            {
-                this.setMaHoaDon(ma);
-                break;
-            }
+            this.setMaHoaDon(sc.nextLine());
+            if(ds_HD.timMa(this.getMaHoaDon()) == null) break;
 
-            ///Nếu đã tồn tại mã thì thông báo cho nhập lại
-            System.out.println("Ma hoa don da ton tai. Hay nhap lai ma hoa don!");
+            System.out.println("Ma hoa don da ton tai. Hay nhap lai ma hoa don.");
         }
 
         while (true){
@@ -85,20 +77,6 @@ public class hoaDonKhach extends hoaDon{
             break;
         }
 
-        //Lấy ra danh sách khách hàng
-        DS_KH ds_kh = new DS_KH();
-        ds_kh.docFile();
-
-        //Nhập mã khách để tìm khách trong dsKH rồi ghi vào hóa đơn
-        while(true){
-            System.out.print("Nhap ma khach hang: ");
-            this.kh=ds_kh.timMa();
-            if(this.kh.getMaKhach() != "") break;
-
-            ///Nếu tìm không có khách hàng
-            System.out.println("Khong ton tai khach hang. Hay nhap lai ma khach hang!");
-        }
-
         //Lấy ra danh sách nhân viên
         DS_NV ds_nv = new DS_NV();
         ds_nv.docFile();
@@ -114,54 +92,53 @@ public class hoaDonKhach extends hoaDon{
             System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien!");
         }
 
-        System.out.print("Nhap so luong cac san pham: ");
-        n=sc.nextInt();
+        System.out.print("Nhap so luong hang hoa: ");
+        this.n = sc.nextInt();
         sc.nextLine();
 
-        for(int i=0;i<n;i++){
-            chiTietSP tmp=new chiTietSP();
+        //Lấy ra danh sách hàng hóa
+        DS_HH timDS = new DS_HH();
+        timDS.docFile();
+        for(int i=0; i<n;i++){
+            // System.out.print("Nhap ma hang hoa them vao hoa don: ");
+            // String ma = sc.nextLine();
+            chitietHH tmp = new chitietHH();
             tmp.nhap();
-            ds_sp.add(tmp);
-            
+            hh.add(tmp);
+            // this.n ++;
         }
     }
 
-    public void xuat(){
+    @Override
+    public void xuat() {
+        // TODO Auto-generated method stub
         System.out.println("- Ma hoa don: " + this.getMaHoaDon());
         System.out.println("- Ngay: " + this.getNgay().get(Calendar.DATE) + "/" + this.getNgay().get(Calendar.MONTH) + "/" + this.getNgay().get(Calendar.YEAR));
-        System.out.println("- Ten khach: " + this.kh.getHoTen());
         System.out.println("- Ten nhan vien: " + this.getNv().getHoTen());
-        System.out.println("- Cac san pham da mua:");
-        for(chiTietSP i: ds_sp){
-            System.out.print("+ " + i.getSP().getTenSP());
-            System.out.print(": " + (int)i.getSP().getGiaSP() + "vnd ");///i.;giaSP   
-            System.out.println("x" + i.getSoLuong()); //i.soLuong
+        System.out.println("- Cac hang hoa:");
+        for(int i=0; i<n;i++){
+            hh.get(i).xuat();
         }
-        System.out.println("- Tong hoa don: " + (int)this.tongHoaDon() + "vnd");
+        System.out.println("- Tong hoa don: " + (int)this.tongHoaDon() + " vnd");
     }
 
-    public double tongHoaDon(){
-        double tong=0;
-        for(chiTietSP i: ds_sp){
-            tong+=i.getSP().getGiaSP()*i.getSoLuong();//i.hh.getGiaSP()*i.soLuong
+    @Override
+    public double tongHoaDon() {
+        // TODO Auto-generated method stub
+        double tong = 0;
+        for(int i = 0; i < n; i++){
+            tong += hh.get(i).tinhThanhTien();
         }
         return tong;
     }
-
-    public ArrayList<chiTietSP> getDs_sp() {
-        return ds_sp;
+    public ArrayList<chitietHH> getHh() {
+        return hh;
     }
     public int getN() {
         return n;
     }
-    public khachHang getKh() {
-        return kh;
-    }
-    public void setKh(khachHang kh) {
-        this.kh = kh;
-    }
-    public void setDs_sp(ArrayList<chiTietSP> ds_sp) {
-        this.ds_sp = ds_sp;
+    public void setHh(ArrayList<chitietHH> hh) {
+        this.hh = hh;
     }
     public void setN(int n) {
         this.n = n;

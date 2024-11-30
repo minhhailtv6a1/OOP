@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class DS_NV {
+public class DS_NV implements danhSach{
     ArrayList<nhanVien> nv;
     int n;
 
@@ -22,13 +22,15 @@ public class DS_NV {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong nhan vien: ");
         int n1 = sc.nextInt();
-        n+=n1;
         sc.nextLine();
+
         for(int i=0;i<n1;i++){
             System.out.println("Nhan vien: " + ( i + 1 ) );
             nhanVien tmp = new nhanVien();
             tmp.nhap();
             nv.add(tmp);
+            this.n ++;
+            this.ghiFile();
         }
     }
 
@@ -53,13 +55,22 @@ public class DS_NV {
             return;
         }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de tim: ");
-        String ma=sc.nextLine();
-        for(int i=0;i<n;i++)
+        // DS_NV ds_NV = new DS_NV();
+        // ds_NV.docFile();
+        String ma;
+        while(true){
+            System.out.print("Nhap ma de tim: ");
+            ma=sc.nextLine();
+            ///Nếu có tồn tại nhân viên thì xuất ra và return
+            for(int i=0;i<n;i++)
             if(nv.get(i).getMaNhanVien().equals(ma)){
                 nv.get(i).xuat();
-                break;
+                return;
             }
+
+            ///Nếu không tồn tại thì bắt nhập lại
+            System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien");
+        }
     }
 
     public void them(){
@@ -72,11 +83,20 @@ public class DS_NV {
     public void them(nhanVien a){
         nv.add(a);
         n++;
+        this.ghiFile();
     }
 
     public nhanVien timMa(){
         Scanner sc = new Scanner(System.in);
         String ma = sc.nextLine();
+        for(int i=0;i<n;i++){
+            if(nv.get(i).getMaNhanVien().equals(ma))
+            return nv.get(i);
+        }
+        return new nhanVien();
+    }
+
+    public nhanVien timMa(String ma){
         for(int i=0;i<n;i++){
             if(nv.get(i).getMaNhanVien().equals(ma))
             return nv.get(i);
@@ -91,14 +111,33 @@ public class DS_NV {
             System.out.println("KHONG CO NHAN VIEN NAO");
             return;
         }      
-        System.out.print("Nhap ma muon xoa: ");
-        nhanVien tmp = timMa();
-        if(tmp.getMaNhanVien()==""){
-            System.out.println("Nhan vien khong ton tai!");
-            return;
+
+        Scanner sc = new Scanner(System.in);
+        nhanVien tmp;
+        // DS_NV ds_NV = new DS_NV();
+        // ds_NV.docFile();
+        while(true){
+            System.out.print("Nhap ma muon xoa: ");
+            tmp = timMa();
+            if(tmp.getMaNhanVien() != "") break;
+
+            System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien.");
         }
-        nv.remove(tmp);
-        n--;
+
+        int choice;
+        while(true){
+            System.out.print("Ban co chac chan muon xoa nhan vien nay? (Nhap 1 de xoa, 2 de huy): ");
+            choice = Integer.parseInt(sc.nextLine());
+            if(choice == 1 || choice == 2) break;
+
+            System.out.println("Nhap sai chuc nang. Hay nhap lai.");
+        }
+
+        if(choice == 1){
+            nv.remove(tmp);
+            n--;
+            this.ghiFile();
+        }
     }
 
     public void sua(){
@@ -108,12 +147,15 @@ public class DS_NV {
             System.out.println("KHONG CO NHAN VIEN NAO");
             return;
         }
-        System.out.print("Nhap ma muon sua: ");
-        nhanVien tmp = timMa();
-        if(tmp.getMaNhanVien()==""){
-            System.out.println("Nhan vien khong ton tai!");
-            return;
+        nhanVien tmp;
+        while(true){
+            System.out.print("Nhap ma muon sua: ");
+            tmp = timMa();
+            if(tmp.getMaNhanVien() != "") break;
+
+            System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien.");
         }
+        
 
         Scanner sc = new Scanner(System.in);
         int chon;
@@ -134,13 +176,21 @@ public class DS_NV {
         sc.nextLine();
         switch(chon){
             case 1: {
-                System.out.println("Nhap ma nhan vien: ");
-                String makh= sc.nextLine();
-                nv.get(nv.indexOf(tmp)).setMaNhanVien(makh);
+                // DS_NV ds_NV = new DS_NV();
+                // ds_NV.docFile();
+                String ma;
+                while(true){
+                    System.out.print("Nhap ma nhan vien: ");
+                    ma = sc.nextLine();
+                    if(timMa(ma).getMaNhanVien() == "") break;
+
+                    System.out.println("Ma nhan vien da ton tai. Hay nhap lai ma nhan vien.");
+                }
+                nv.get(nv.indexOf(tmp)).setMaNhanVien(ma);
             } break;
 
             case 2: {
-                System.out.println("Nhap ten nhan vien: ");
+                System.out.print("Nhap ten nhan vien: ");
                 String tenkh= sc.nextLine();
                 nv.get(nv.indexOf(tmp)).setHoTen(tenkh);
             } break;
@@ -196,18 +246,17 @@ public class DS_NV {
             default:  System.out.println("Chon sai chuc nang!");
                 break;
         }
+        this.ghiFile();
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try{
-            System.out.println("--------------------------------");
-            System.out.println("\tLUU DANH SACH NHAN VIEN");
             FileWriter f = new FileWriter("nhanVien.txt");
-            String line = nv.size() + "\n";
+            String line = "";
             for(int i=0;i<n;i++){
                 nhanVien  tmp = nv.get(i);
-                line += tmp.getMaNhanVien() + ";"  + tmp.getHoTen() + ";" + tmp.getNamSinh() + ";" + tmp.getGioiTinh() + ";";
-                line += tmp.getSoDienThoai() + ";" + tmp.getViTri() + ";" + tmp.getCaLam() + ";" + tmp.getSoGio() + ";";
+                line += tmp.getMaNhanVien() + ","  + tmp.getHoTen() + "," + tmp.getNamSinh() + "," + tmp.getGioiTinh() + ",";
+                line += tmp.getSoDienThoai() + "," + tmp.getViTri() + "," + tmp.getCaLam() + "," + tmp.getSoGio() + ",";
                 line += (int)tmp.getLuongCoBan() + "\n";
             }
             f.write(line);
@@ -217,19 +266,16 @@ public class DS_NV {
         }
     }
 
-    public void docfile(){
+    public void docFile(){
         try {
-            System.out.println("--------------------------------------");
-            System.out.println("\tTAI DANH SACH NHAN VIEN");
             BufferedReader f = new BufferedReader( new FileReader("nhanVien.txt"));
-            String line = f.readLine();
-            n = Integer.parseInt(line);
+            String line = "";
             // System.out.println(n);
             nv.clear();
             while(true){
                 line = f.readLine();
                 if(line==null) break;
-                String []a = line.split(";");
+                String []a = line.split(",");
                 nhanVien tmp = new nhanVien();
                 // for(int i = 0; i<a.length;i++){
                 //     System.out.println(a[i]);
@@ -247,6 +293,7 @@ public class DS_NV {
                 // tmp.xuat();
                 nv.add(tmp);
             }
+            this.n=nv.size();
         } catch (Exception e) {
             System.out.println(e);
         }

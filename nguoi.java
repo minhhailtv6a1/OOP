@@ -60,17 +60,17 @@ public abstract class nguoi {
     }
     public void nhap(){
         Scanner sc=new Scanner(System.in);
-        System.out.println("Nhap ten: ");
+        System.out.print("Nhap ten: ");
         this.hoTen=sc.nextLine();
-        System.out.println("Nhap gioi tinh:");
+        System.out.print("Nhap gioi tinh: ");
         this.gioiTinh=sc.nextLine();
-        System.out.println("Nhap sdt: ");
+        System.out.print("Nhap sdt: ");
         while(true){
             this.soDienThoai=sc.nextLine();
             if(soDienThoai.charAt(0)=='0'&&soDienThoai.length()==10) break;
             System.out.println("Sdt khong hop le! Hay nhap lai.");
         }
-        System.out.println("Nhap nam sinh: ");
+        System.out.print("Nhap nam sinh: ");
         while(true){
             this.namSinh=sc.nextInt();
             sc.nextLine();

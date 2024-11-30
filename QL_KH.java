@@ -4,6 +4,7 @@ public class QL_KH {
 
     public void menu(){
         Scanner sc=new Scanner(System.in);
+        ds_kh.docFile();
         while(true){
             menuFunction();
             System.out.print("Hay chon chuc nang: ");
@@ -28,18 +29,27 @@ public class QL_KH {
                 case 6: ds_kh.xoa();
                     break;
 
-                case 7: ds_kh.docfile();
-                    break;
+                // case 7: {
+                //     System.out.println("------------------------------------------------");
+                //     System.out.println("\tTAI DANH SACH KHACH HANG THANH CONG");
+                //     ds_kh.docFile();
+                // }
+                //     break;
 
-                case 8: ds_kh.ghifile();
-                    break;
+                // case 8: {
+                //     System.out.println("--------------------------------------------------");
+                //     System.out.println("\tLUU DANH SACH KHACH HANG THANH CONG");
+                //     ds_kh.ghiFile();
+                // }
+                //     break;
 
-                case 9: ;
+                case 7: ;
+                    ds_kh.ghiFile();
                     break;
                 default: System.out.println("Nhap sai chuc nang. Hay nhap lai!");
                     break;
             }
-            if(chon==9) break;
+            if(chon==7) break;
         }
     }
 
@@ -53,8 +63,8 @@ public class QL_KH {
         System.out.println("4. Them khach hang");
         System.out.println("5. Sua khach hang");
         System.out.println("6. Xoa khach hang");
-        System.out.println("7. Tai danh sach khach hang");
-        System.out.println("8. Luu danh sach khach hang");
-        System.out.println("9. Thoat");
+        // System.out.println("7. Tai danh sach khach hang");
+        // System.out.println("8. Luu danh sach khach hang");
+        System.out.println("7. Thoat");
     }
 }

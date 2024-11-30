@@ -1,5 +1,11 @@
-4
-nv01;hai tran;2005;nam;0123456789;pha che;1;8;25000
-nv02;giang nguyen;2005;nu;0765413289;phuc vu;2;8;25000
-nv03;dung lam;2005;nam;0561239874;lao cong;1;8;25000
-nv04;khoi doan;2005;nam;0564123879;dau bep;2;8;25000
+nv01,hai tran,2005,nam,0123456789,pha che,1,8,25000
+nv02,giang nguyen,2005,nu,0765413289,phuc vu,2,8,25000
+nv03,dung lam,2005,nam,0561239874,lao cong,1,8,25000
+nv04,khoi doan,2005,nam,0564123879,dau bep,2,8,25000
+nv05,son min,1996,nam,0124578963,dau bep,2,8,50000
+nv06,J97,1997,nam,0159874263,quan li,2,6,55000
+nv07,meomeo,2000,nu,0111123654,lao cong,1,8,23000
+nv08,lakaka,2001,nam,0111222333,pha che,2,5,25000
+nv09,anh long,1995,nam,0999999999,quan li,1,8,65000
+nv00,bao bao,1995,nam,0159487245,lao cong,2,6,25000
+nv10,a loi,20001,nu,0125463254,dau bep,1,8,30000

@@ -1,0 +1,8 @@
+BM01,Banh mi ga,21000.0,Banh mi - tuong - ga,Banh mi
+CF01,Ca phe sua,15000.0,M,50.0,70.0
+ST01,Sinh to bo,20000.0,M,70.0,40.0
+HT01,Hu tiu suon,35000.0,hu tieu - suon,mon nuoc
+TS01,Tra sua chan chau,20000.0,XL,50.0,70.0
+MX01,My xao bo,40000.0,mi - bo,mon kho
+BM02,Banh mi op la,15000.0,banh mi - trung,mon kho
+CF02,Ca phe da,15000.0,M,70.0,30.0

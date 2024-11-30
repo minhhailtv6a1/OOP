@@ -1,20 +1,30 @@
 import java.util.Scanner;
-public class sanPhamSoLuong {
+public class chiTietSP {
     private sanPham sp;
     private int soLuong;
 
-    public sanPhamSoLuong(sanPham sp, int soLuong) {
+    public chiTietSP(sanPham sp, int soLuong) {
         this.sp = sp;
         this.soLuong = soLuong;
     }
 
-    public sanPhamSoLuong(){
+    public chiTietSP(){
         this.sp=new sanPham();
         this.soLuong=0;
     }
 
     public void nhap(){
-        sp.nhap();
+        DS_SP  ds_sp = new DS_SP();
+        ds_sp.docFile();
+        
+        while(true){
+            System.out.print("Nhap ma san pham: ");
+            sp=ds_sp.timMa();
+            if(sp.getMaSP() != "") break;
+
+            ///Nếu nó bằng rỗng
+            System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham!");
+        }
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap so luong: ");
         this.soLuong=sc.nextInt();

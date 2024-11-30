@@ -54,8 +54,30 @@ public class hangHoa {
     }
     public void nhapHangHoa () {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma hang: ");
-        maHang = sc.nextLine();
+        DS_HH ds_HH = new DS_HH();
+        while(true){
+            System.out.print("Nhap ma hang: ");
+            maHang = sc.nextLine();
+            ///Nếu mã hàng hóa không tồn tại thì cho nhập
+            if(ds_HH.searchHH(maHang).getMaHang() != "") break;
+
+            ///Nếu mã hàng hóa đã tồn tại thì bắt nhập lại
+            System.out.println("Ma hang hoa da ton tai. Hay nhap lai ma hang hoa.");
+        }
+        System.out.print("Nhap ten hang: ");
+        tenHang = sc.nextLine();
+        System.out.print("Nhap so luong: ");
+        soLuong = sc.nextInt();
+        System.out.print("Nhap gia hang hoa: ");
+        giaHH = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Nhap noi san xuat: ");
+        noiSX = sc.nextLine();
+
+    }
+    public void nhapHangHoa (String ma) {
+        Scanner sc = new Scanner(System.in);
+        this.maHang = ma;
         System.out.print("Nhap ten hang: ");
         tenHang = sc.nextLine();
         System.out.print("Nhap so luong: ");

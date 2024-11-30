@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class DS_KH {
+public class DS_KH implements danhSach{
     ArrayList<khachHang> ds_kh;
     int n;
 
@@ -20,13 +20,14 @@ public class DS_KH {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong khach hang: ");
         int n1 = sc.nextInt();
-        n+=n1;
         sc.nextLine();
         for(int i=0;i<n1;i++){
             System.out.println("Khach hang: " + ( i + 1 ) );
             khachHang tmp = new khachHang();
             tmp.nhap();
             ds_kh.add(tmp);
+            this.n++;
+            this.ghiFile();
         }
     }
 
@@ -51,13 +52,18 @@ public class DS_KH {
             return;
         }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de tim: ");
-        String ma=sc.nextLine();
-        for(int i=0;i<n;i++)
+
+        while(true){
+            System.out.print("Nhap ma de tim: ");
+            String ma=sc.nextLine();
+            for(int i=0;i<n;i++)
             if(ds_kh.get(i).getMaKhach().equals(ma)){
                 ds_kh.get(i).xuat();
-                break;
+                return;
             }
+            ///Nếu tìm không có
+            System.out.println("Khong ton tai khach hang. Hay nhap lai ma khach hang.");
+        }
     }
 
     public void them(){
@@ -70,11 +76,20 @@ public class DS_KH {
     public void them(khachHang a){
         ds_kh.add(a);
         n++;
+        this.ghiFile();
     }
 
     public khachHang timMa(){
         Scanner sc = new Scanner(System.in);
         String ma = sc.nextLine();
+        for(int i=0;i<n;i++){
+            if(ds_kh.get(i).getMaKhach().equals(ma))
+            return ds_kh.get(i);
+        }
+        return new khachHang();
+    }
+
+    public khachHang timMa(String ma){
         for(int i=0;i<n;i++){
             if(ds_kh.get(i).getMaKhach().equals(ma))
             return ds_kh.get(i);
@@ -88,15 +103,36 @@ public class DS_KH {
         if(ds_kh.size()==0){
             System.out.println("KHONG CO KHACH HANG NAO");
             return;
-        }    
-        System.out.print("Nhap ma muon xoa: ");
-        khachHang tmp = timMa();
-        if(tmp.getMaKhach()==""){
-            System.out.println("Khach hang khong ton tai!");
-            return;
+        } 
+
+        khachHang tmp;
+        while(true){
+            System.out.print("Nhap ma muon xoa: ");
+            tmp = timMa();
+            ///Nếu tìm khách hàng tồn tại
+            if(tmp.getMaKhach()!="") break;
+
+            ///Nếu khách hàng không tồn tại
+            System.out.println("Khong ton tai khach hang. Hay nhap lai ma khach hang.");
+        
+        }  
+        int choice;
+        System.out.print("Ban co chac chan muon xoa khach hang nay? (Nhap 1 de xoa, 2 de huy): ");
+        while(true){
+            Scanner sc = new Scanner(System.in);
+            choice = Integer.parseInt(sc.nextLine());
+            if(choice == 1 || choice ==2) break;
+
+            ///Nếu chọn khác
+            System.out.println("Nhap sai. Hay nhap lai.");
         }
-        ds_kh.remove(tmp);
-        n--;
+
+        ///Nếu choice = 1 thì xóa
+        if(choice == 1){
+            ds_kh.remove(tmp);
+            n--;
+            this.ghiFile();
+        }
     }
 
     public void sua(){
@@ -106,12 +142,17 @@ public class DS_KH {
             System.out.println("KHONG CO KHACH HANG NAO");
             return;
         }
-        System.out.print("Nhap ma muon sua: ");
-        khachHang tmp = timMa();
-        if(tmp.getMaKhach()==""){
-            System.out.println("Khach hang khong ton tai!");
-            return;
-        }
+        khachHang tmp;
+        while(true){
+            System.out.print("Nhap ma muon sua: ");
+            tmp = timMa();
+            ///Nếu tìm khách hàng tồn tại
+            if(tmp.getMaKhach()!="") break;
+
+            ///Nếu khách hàng không tồn tại
+            System.out.println("Khong ton tai khach hang. Hay nhap lai ma khach hang.");
+        
+        }  
 
         Scanner sc = new Scanner(System.in);
         int chon;
@@ -128,37 +169,46 @@ public class DS_KH {
         sc.nextLine();
         switch(chon){
             case 1: {
-                System.out.println("Nhap ma khach: ");
-                String makh= sc.nextLine();
-                ds_kh.get(ds_kh.indexOf(tmp)).setMaKhach(makh);
+                String ma;
+                // DS_KH ds_KH = new DS_KH();
+                // ds_KH.docFile();
+                while(true){
+                    System.out.print("Nhap ma khach: ");
+                    ma = sc.nextLine();
+                    if(timMa(ma).getMaKhach() == "") break;
+
+                    System.out.println("Ma khach hang da ton tai. Hay nhap lai ma khach hang.");
+                }
+
+                ds_kh.get(ds_kh.indexOf(tmp)).setMaKhach(ma);
             } break;
 
             case 2: {
-                System.out.println("Nhap ten khach: ");
+                System.out.print("Nhap ten khach: ");
                 String tenkh= sc.nextLine();
                 ds_kh.get(ds_kh.indexOf(tmp)).setHoTen(tenkh);
             } break;
 
             case 3: {
-                System.out.println("Nhap nam sinh: ");
+                System.out.print("Nhap nam sinh: ");
                 int namSinh= Integer.parseInt(sc.nextLine());
                 ds_kh.get(ds_kh.indexOf(tmp)).setNamSinh(namSinh);
             } break;
 
             case 4: {
-                System.out.println("Nhap gioi tinh: ");
+                System.out.print("Nhap gioi tinh: ");
                 String gioiTinh= sc.nextLine();
                 ds_kh.get(ds_kh.indexOf(tmp)).setGioiTinh(gioiTinh);
             } break;
 
             case 5: {
-                System.out.println("Nhap so dien thoai: ");
+                System.out.print("Nhap so dien thoai: ");
                 String sdt= sc.nextLine();
                 ds_kh.get(ds_kh.indexOf(tmp)).setSoDienThoai(sdt);
             } break;
 
             case 6: {
-                System.out.println("Nhap diem tich luy: ");
+                System.out.print("Nhap diem tich luy: ");
                 int diemTichLuy= Integer.parseInt(sc.nextLine());
                 ds_kh.get(ds_kh.indexOf(tmp)).setDiemTichLuy(diemTichLuy);
             } break;
@@ -173,18 +223,17 @@ public class DS_KH {
             default:  System.out.println("Chon sai chuc nang!");
                 break;
         }
+        this.ghiFile();
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try{
-            System.out.println("----------------------------------------");
-            System.out.println("\tLUU DANH SACH KHACH HANG");
             FileWriter f = new FileWriter("khachHang.txt");
-            String line = ds_kh.size() + "\n";
+            String line = "";
             for(int i=0;i<n;i++){
                 khachHang  tmp = ds_kh.get(i);
-                line += tmp.getMaKhach() + ";"  + tmp.getHoTen() + ";" + tmp.getNamSinh() + ";" + tmp.getGioiTinh() + ";";
-                line += tmp.getSoDienThoai() + ";" + tmp.getDiemTichLuy() + "\n";
+                line += tmp.getMaKhach() + ","  + tmp.getHoTen() + "," + tmp.getNamSinh() + "," + tmp.getGioiTinh() + ",";
+                line += tmp.getSoDienThoai() + "," + tmp.getDiemTichLuy() + "\n";
             }
             f.write(line);
             f.close();
@@ -193,19 +242,16 @@ public class DS_KH {
         }
     }
 
-    public void docfile(){
+    public void docFile(){
         try {
-            System.out.println("--------------------------------------");
-            System.out.println("\tTAI DANH SACH KHACH HANG");
             BufferedReader f = new BufferedReader( new FileReader("khachHang.txt"));
-            String line = f.readLine();
-            n = Integer.parseInt(line);
+            String line = "";
             // System.out.println(n);
             ds_kh.clear();
             while(true){
                 line = f.readLine();
                 if(line==null) break;
-                String []a = line.split(";");
+                String []a = line.split(",");
                 khachHang tmp = new khachHang();
                 // for(int i = 0; i<a.length;i++){
                 //     System.out.println(a[i]);
@@ -220,9 +266,9 @@ public class DS_KH {
                 // tmp.xuat();
                 ds_kh.add(tmp);
             }
+            this.n = ds_kh.size();
         } catch (Exception e) {
             System.out.println(e);
-        }
-        
+        }        
     }
 }

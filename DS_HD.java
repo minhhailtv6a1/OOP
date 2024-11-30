@@ -5,122 +5,220 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class DS_HD {
+public class DS_HD implements danhSach {
     ArrayList<hoaDon> hd;
     int n;
-    int select;//Chon hoaDonKhach hay hoaDonNhap
+    // int select;//Chon hoaDonKhach hay hoaDonNhap
     public DS_HD(){
         hd=new ArrayList<hoaDon>();
         n=0;
-        select=0;
+        // select=0;
     }
 
-    public DS_HD(ArrayList<hoaDon> hd,int n,int select){
+    public DS_HD(ArrayList<hoaDon> hd,int n){
         this.n=n;
         this.hd=hd;
-        this.select=select;
+        // this.select=select;
     }
 
-    public void chonHoaDon(int x){
-        select=x;
+    public int chonHoaDon(){
+        Scanner sc = new Scanner(System.in);
+        int loai;  
+            System.out.println("1. Hoa don khach");
+            System.out.println("2. Hoa don nhap hang");
+            System.out.println("3. Thoat");
+            System.out.print("Chon loai hoa don: ");
+            loai = sc.nextInt();
+            sc.nextLine();
+            while (loai < 1|| loai > 3) {
+                System.out.println("Nhap sai, vui long nhap lai");
+                loai = sc.nextInt();
+                sc.nextLine();
+            }
+        return loai;
     }
     public void nhap(){
+        System.out.println("--------------------------------");
+        System.out.println("\tNHAP DANH SACH HOA DON");
         Scanner sc=new Scanner(System.in);
         System.out.print("Nhap so luong hoa don: ");
-        this.n=sc.nextInt();
+        int n1=sc.nextInt();
         sc.nextLine();
-        for(int i=0;i<n;i++){
+        // int select = chonHoaDon();
+        for(int i=0;i<n1;i++){
+            int select = chonHoaDon();
+            if(select == 3){ 
+                // n1 = i;
+                return;
+            }
             hoaDon tmp;
-            if(this.select==1) tmp=new hoaDonKhach();
-            else tmp=new hoaDonKhach();//hoaDonNhap
+            if(select==1) tmp=new hoaDonKhach();
+            else tmp=new hoaDonNhapHang();//hoaDonNhap
             tmp.nhap();
             hd.add(tmp);
+            this.n ++;
+            this.ghiFile();
         }
     }
 
     public void xuat(){
+        System.out.println("------------------------------------------------------");
+        System.out.println("\tDANH SACH HOA DON  - Tong ( " + hd.size() + " hoa don )");
+        if(hd.size()==0){
+            System.out.println("KHONG CO HOA DON NAO");
+            return;
+        }
         for(int i=0;i<n;i++){
             hd.get(i).xuat();
+            System.out.println();
         }
     }
 
     public void timKiem(){
+        System.out.println("---------------------------");
+        System.out.println("\tTIM KIEM");
+        if(hd.size()==0){
+            System.out.println("KHONG CO HOA DON NAO");
+            return;
+        }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de tim: ");
-        int ma=sc.nextInt();
-        sc.nextLine();
-        for(int i=0;i<n;i++)
-            if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.get(i).xuat();
-                break;
-            }
+        while(true){
+            System.out.print("Nhap ma de tim: ");
+            String ma=sc.nextLine();
+            for(int i=0;i<n;i++)
+                if(hd.get(i).getMaHoaDon().equals(ma)){
+                    hd.get(i).xuat();
+                    return;
+                }
+            ///Nếu tìm không có
+            System.out.println("Khong ton tai hoa don. Hay nhap lai ma hoa don.");
+        }
     }
 
     public void them(){
+        System.out.println("--------------------------------");
+        System.out.println("\tTHEM HOA DON");
         hoaDon tmp;
-        if(this.select==1) tmp=new hoaDonKhach();
-            else tmp=new hoaDonKhach();//hoaDonNhap
+        int select = chonHoaDon();
+        if(select == 3) return;
+        if(select==1) tmp=new hoaDonKhach();
+            else tmp=new hoaDonNhapHang();//hoaDonNhap
         tmp.nhap();
         them(tmp);
     }
     public void them(hoaDon a){
         hd.add(a);
         n++;
+        this.ghiFile();
     }
 
     public void xoa(){
+        System.out.println("--------------------------------");
+        System.out.println("\tXOA HOA DON");
+        if(hd.size()==0){
+            System.out.println("KHONG CO HOA DON NAO");
+            return;
+        }      
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma de xoa: ");
-        int ma=sc.nextInt();
-        sc.nextLine();
+        hoaDon tmp;
+        while(true){
+            System.out.print("Nhap ma de xoa: ");
+            String ma=sc.nextLine();
+            tmp = timMa(ma);
+            if(tmp != null) break;
+
+            System.out.println("Khong ton tai ma hoa don. Hay nhap lai ma hoa don.");
+        }
+
+        int choice;
+        while(true){
+            System.out.print("Ban co chac chac muon xoa hoa don nay? (Nhap 1 de xoa, 2 de huy): ");
+            choice = Integer.parseInt(sc.nextLine());
+            if(choice == 1 || choice == 2) break;
+            
+            System.out.println("Nhap sai. Hay nhap lai.");
+        }
+        if(choice == 1){
+            hd.remove(tmp);
+            n--;
+            this.ghiFile();
+        }
+    }
+
+    public hoaDon timMa(String ma){
         for(int i=0;i<n;i++)
             if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.remove(i);
-                n--;
-                break;
+                return hd.get(i);
             }
+        return null;
     }
 
     public void sua(){
+        System.out.println("--------------------------------");
+        System.out.println("\tSUA HOA DON");
+        if(hd.size()==0){
+            System.out.println("KHONG CO HOA DON NAO");
+            return;
+        }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap ma muon sua: ");
-        int ma=sc.nextInt();
-        sc.nextLine();
-        for(int i=0;i<n;i++)
-            if(hd.get(i).getMaHoaDon().equals(ma)){
-                hd.get(i).nhap();
-                break;
-            }
+
+        hoaDon tmp;
+        while(true){
+            System.out.print("Nhap ma muon sua: ");
+            String ma = sc.nextLine();
+            tmp = timMa(ma);
+            if(tmp != null) break;
+
+            System.out.println("Khong ton tai hoa don. Hay nhap lai ma hoa don.");
+        }
+        ///Nhập lại thông tin hóa đơn muốn sửa
+        hd.get(hd.indexOf(tmp)).nhap();
+        this.ghiFile();
     }
 
-    public void ghifile(){
+    public void ghiFile(){
         try {
             FileWriter fw = new FileWriter("hoaDon.txt");
+            String line = "";
             for(int i=0;i<n;i++){
-                if(hd.get(i) instanceof hoaDonKhach){
+                if(hd.get(i) instanceof hoaDonKhach){ // hoa don khach
                     hoaDonKhach tmp=(hoaDonKhach)hd.get(i);
-                    String line=tmp.getMaHoaDon() + ";" + tmp.getNgay().get(Calendar.DATE) + ";" + tmp.getNgay().get(Calendar.MONTH) + ";" + tmp.getNgay().get(Calendar.YEAR) + ";" + tmp.getKh().getHoTen(); 
-                    for(sanPhamSoLuong j : tmp.getDs_sp()){
-                        line+=";" + j.getSP().getMaSP() + ";" + j.getSP().getTenSP() + ";" + j.getSP().getGiaSP() + ";" + j.getSoLuong();
+                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
+                    line += tmp.getKh().getMaKhach() + ",";
+                    line += tmp.getNv().getMaNhanVien();
+                    for(chiTietSP j : tmp.getDs_sp()){
+                        line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
                     }
-                    line+=";" + tmp.tongHoaDon();
-                    fw.write(line + "\n");
+                    line +="\n";
+                }
+
+                // hoa doa nhap
+                else{
+                    hoaDonNhapHang tmp = (hoaDonNhapHang)hd.get(i);
+                    line += tmp.getMaHoaDon() + "," + tmp.getNgay().get(Calendar.DATE) + "," + tmp.getNgay().get(Calendar.MONTH) + "," + tmp.getNgay().get(Calendar.YEAR) + ",";
+                    line += tmp.getNv().getMaNhanVien();
+                    for(chitietHH x: tmp.getHh()){
+                        line += "," + x.getHh().getMaHang() + "," + x.getSoLuong();
+                    }
+                    line += "\n";
                 }
             }
-
+            fw.write(line);
             fw.close();
             } 
             catch (Exception e) {
                 System.out.println(e);            
             }
     }
-    public void docfile(){
+    public void docFile(){
         try {
             BufferedReader input = new BufferedReader(new FileReader("hoaDon.txt"));
-            String line = input.readLine();
-            while (line != null) {
-            // chia chuỗi thành các chuỗi con phân cách bởi dấu phẩy
-            String[] arr = line.split(";");
+            String line = "";
+            while (true) {
+            line = input.readLine();
+            if(line == null) break;
+
+            String[] arr = line.split(",");
             if(arr[0].contains("hdk"))////Nhận diện bằng mã hóa đơn
             {
                 hoaDonKhach tmp = new hoaDonKhach();
@@ -128,24 +226,71 @@ public class DS_HD {
                 Calendar date=Calendar.getInstance();
                 date.set(Integer.parseInt(arr[3]), Integer.parseInt(arr[2]), Integer.parseInt(arr[1]));
                 tmp.setNgay(date);
-                tmp.getKh().setHoTen(arr[4]);
-                
-                for(int i=5;i<arr.length-1;i+=4)
-                {
-                    sanPhamSoLuong sp1=new sanPhamSoLuong();
-                    sp1.getSP().setMaSP(arr[i]);
-                    sp1.getSP().setTenSP(arr[i+1]);
-                    sp1.getSP().setGiaSP(Double.parseDouble(arr[i+2]));
-                    sp1.setSoLuong(Integer.parseInt(arr[i+3]));
-                    tmp.getDs_sp().add(sp1);
 
-                    // System.out.println(arr[i]);
+                //Đọc file ds_KH
+                DS_KH ds_KH = new DS_KH();
+                ds_KH.docFile();
+                //Cho setKh = kh ma tim duoc trong ds_KH bang ma
+                tmp.setKh(ds_KH.timMa(arr[4]));  
+                
+                //Đọc file ds_NV
+                DS_NV ds_NV = new DS_NV();
+                ds_NV.docFile();
+                tmp.setNv(ds_NV.timMa(arr[5]));
+
+                //Đọc file ds_SP
+                DS_SP ds_SP = new DS_SP();
+                ds_SP.docFile();
+                
+
+                ///Lấy chi tiết sp vừa đọc add là ArrayList chiTietSPs
+                ArrayList<chiTietSP> chiTietSPs = new ArrayList<>();
+                for(int i=6;i<arr.length; i = i + 2){
+                    //Cho setSP = SP ma tim duoc trong ds_SP bang ma
+                    ///Chi tiết SP để đọc từ file lên
+                    chiTietSP sp1=new chiTietSP();
+                    sp1.setSP(ds_SP.timMa(arr[i]));
+                    sp1.setSoLuong(Integer.parseInt(arr[i+1]));
+                    chiTietSPs.add(sp1);
                 }
+                ///Set ds_sp của hóa đơn tmp = ArrayList chiTietSPs
+                tmp.setDs_sp(chiTietSPs);
+                
+                hd.add(tmp);
             }
-            // for(String s: arr){
-            //     System.out.println(s);
-            // }
-            line = input.readLine();
+
+            // Hoa don nhap
+            else{
+                hoaDonNhapHang tmp = new hoaDonNhapHang();
+                tmp.setMaHoaDon(arr[0]);
+                Calendar date=Calendar.getInstance();
+                date.set(Integer.parseInt(arr[3]), Integer.parseInt(arr[2]), Integer.parseInt(arr[1]));
+                tmp.setNgay(date);
+
+                //Đọc file ds_NV
+                DS_NV ds_NV = new DS_NV();
+                ds_NV.docFile();
+                tmp.setNv(ds_NV.timMa(arr[4]));
+
+                //Đọc file ds_HH
+                DS_HH ds_HH = new DS_HH();
+                ds_HH.docFile();
+
+                ArrayList<chitietHH> chitietHHs = new ArrayList<>();
+                for(int i=5; i<arr.length; i = i + 2){
+                    ///Đọc chi tiết hàng hóa từ file
+                    chitietHH hh1 = new chitietHH();
+                    hh1.setHh(ds_HH.searchHH(arr[i]));
+                    hh1.setSoLuong(Integer.parseInt(arr[i+1]));
+                    ///Thêm chi tiết vừa đọc vào ArrayList chitietHHs
+                    chitietHHs.add(hh1);
+                }
+                tmp.setHh(chitietHHs);
+                tmp.setN(tmp.getHh().size());
+                hd.add(tmp);
+                // System.out.println(hd.size());
+            }
+            this.n = hd.size();
             }
             input.close();
             } catch (Exception ex) {

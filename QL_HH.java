@@ -16,7 +16,7 @@ public class QL_HH {
     public void run(){
         Scanner sc = new Scanner(System.in);
         int choice;
-        ds.docfile();
+        ds.docFile();
         do {
             menu();
             System.out.println("Nhap lua chon: ");
@@ -65,21 +65,22 @@ public class QL_HH {
                 case 6:
                     ds.sua();
                     break;
-                case 7: 
-                    ds.docfile();
-                    break;
-                case 8:
-                    ds.ghifile();
-                    break;
-                case 9:
-                    ds.ghifile();
-                    System.out.println("Ket thuc chuong trinh");
+                // case 7: 
+                //     ds.docFile();
+                //     break;
+                // case 8:
+                //     ds.ghiFile();
+                //     break;
+                case 7:
+                    ds.ghiFile();
+                    // System.out.println("Ket thuc chuong trinh");
                     break;
                 default:
                     System.out.println("Nhap sai, moi nhap lai");
                     break;      
             }
 
-        } while (choice != 9);
+        } while (choice != 7);
     }
 }
+

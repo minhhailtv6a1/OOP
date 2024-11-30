@@ -28,7 +28,7 @@ public class chitietHH  {
         String ma = sc.nextLine();
 
         DS_HH ds = new DS_HH();
-        ds.docfile();
+        ds.docFile();
 
         if (ds.searchHH(ma) == null) {
             int loai = ds.chonLoaiHH();
@@ -38,7 +38,7 @@ public class chitietHH  {
             else {
                 hh = new thucPham();
             }
-            hh.nhapHangHoa();
+            hh.nhapHangHoa(ma);
             soLuong = hh.getSoLuong();
             ds.them(hh);
         }
@@ -49,11 +49,22 @@ public class chitietHH  {
             hh.setSoLuong(hh.getSoLuong() + soLuong);
         }
 
-        ds.ghifile();
+        ds.ghiFile();
     }
 
     public void xuat (){
-        hh.xuatHangHoa();
-        System.out.println("So luong nhap: " + soLuong);
+        // hh.xuatHangHoa();
+        System.out.println("+ " + hh.getTenHang() + ": " + (int)hh.getGiaHH() + "vnd" + " x" + this.soLuong);
+    }
+
+    public double tinhThanhTien(){
+        return hh.getGiaHH() * this.soLuong;
+    }
+
+    public hangHoa getHh() {
+        return hh;
+    }
+    public void setHh(hangHoa hh) {
+        this.hh = hh;
     }
 }

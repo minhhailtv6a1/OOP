@@ -36,6 +36,7 @@ public class DS_HH implements danhSach {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong hang hoa: ");
         int count = sc.nextInt();
+        sc.nextLine();
         for (int i=0; i<count; i++) {
             hangHoa hh;
             int loai = chonLoaiHH();
@@ -47,8 +48,10 @@ public class DS_HH implements danhSach {
             }
             hh.nhapHangHoa();
             ds.add(hh);
+            this.ghiFile();
+            this.soLuong++;
         }
-        soLuong += count;
+        // soLuong += count;
     }
 
     @Override
@@ -75,39 +78,47 @@ public class DS_HH implements danhSach {
         hh.nhapHangHoa();
         ds.add(hh);
         soLuong++;
+        this.ghiFile();
     }
 
     public void them (hangHoa hh) {
         ds.add(hh);
         soLuong++;
+        this.ghiFile();
     }
 
     public void xoa () {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma hang can xoa: ");
-        String maHang = sc.nextLine();
-        for (int i = 0; i < soLuong; i++) {
-            if (ds.get(i).getMaHang().equals(maHang)) {
-                ds.remove(i);
-                soLuong--;
-                return;
+
+        while(true){
+            System.out.print("Nhap ma hang can xoa: ");
+            String maHang = sc.nextLine();
+            for (int i = 0; i < soLuong; i++) {
+                if (ds.get(i).getMaHang().equals(maHang)) {
+                    ds.remove(i);
+                    soLuong--;
+                    return;
+                }
             }
+
+            System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
         }
-        System.out.println("Khong tim thay hang co ma: " + maHang);
+        
     }
     @Override
     public void timKiem() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma hang can tim: ");
-        String maHang = sc.nextLine();
-        hangHoa hh = searchHH(maHang);
-        if (hh != null) {
-            hh.xuatHangHoa();
-        }
-        else {
-            System.out.println("Khong tim thay hang co ma: " + maHang);
-        }
-        
+        while(true){
+            System.out.print("Nhap ma hang can tim: ");
+            String maHang = sc.nextLine();
+            hangHoa hh = searchHH(maHang);
+            if (hh != null) {
+                hh.xuatHangHoa();
+                break;
+            }
+
+            System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
+        }        
     }
 
     public hangHoa searchHH (String maHang) {
@@ -121,9 +132,17 @@ public class DS_HH implements danhSach {
 
     public void suaMaHang(hangHoa hh){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma moi: ");
-        String ma = sc.nextLine();
-        hh.setMaHang(ma);
+        while(true){
+            System.out.print("Nhap ma moi: ");
+            String ma = sc.nextLine();
+            if(this.searchHH(ma) == null){
+                hh.setMaHang(ma);
+                break;
+            }
+
+            System.out.println("Ma hoa don da ton tai. Hay nhap lai ma hoa don.");
+        }
+
     }
 
     public void suaTenHang(hangHoa hh) {
@@ -179,9 +198,16 @@ public class DS_HH implements danhSach {
     @Override
     public void sua() {
         Scanner sc = new Scanner (System.in);
-        System.out.print( "Nhap ma hang can sua: ");
-        String maHang = sc.nextLine();
-        hangHoa hh = searchHH(maHang);
+        hangHoa hh;
+        while(true){
+            System.out.print("Nhap ma hang can tim: ");
+            String maHang = sc.nextLine();
+            hh = searchHH(maHang);
+            if (hh != null) break;
+
+            System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
+        }        
+
         if (hh instanceof noiThat) {
             noiThat tmp = (noiThat) hh;
             int choice;
@@ -269,15 +295,10 @@ public class DS_HH implements danhSach {
                 }
             } while(choice != 7);
         }
-        else {
-            System.out.println("Khong tim thay hang co ma: " + maHang);
-        }
-        
-
     }
 
     @Override
-    public void docfile() {
+    public void docFile() {
         try {
             BufferedReader input = new BufferedReader (new FileReader("DS_HH.txt"));
             String line = input.readLine();
@@ -305,7 +326,7 @@ public class DS_HH implements danhSach {
         
     }
     @Override
-    public void ghifile() {
+    public void ghiFile() {
         try {
             FileWriter output = new FileWriter("DS_HH.txt");
             for (hangHoa hh : ds) {
