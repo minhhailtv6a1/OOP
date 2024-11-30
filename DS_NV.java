@@ -223,19 +223,19 @@ public class DS_NV implements danhSach{
                 System.out.println("Nhap ca lam: ");
                 int caLam= Integer.parseInt(sc.nextLine());
                 nv.get(nv.indexOf(tmp)).setCaLam(caLam);
-            }
+            } break;
 
             case 8: {
                 System.out.println("Nhap so gio: ");
                 int soGio= Integer.parseInt(sc.nextLine());
                 nv.get(nv.indexOf(tmp)).setSoGio(soGio);
-            }
+            } break;
 
             case 9: {
                 System.out.println("Nhap luong co ban: ");
                 double luongCB= Integer.parseInt(sc.nextLine());
                 nv.get(nv.indexOf(tmp)).setLuongCoBan(luongCB);
-            }
+            } break;
             case 10: {
                 nv.get(nv.indexOf(tmp)).nhap();
             } break;

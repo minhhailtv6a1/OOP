@@ -9,9 +9,9 @@ public class QL_HH {
         System.out.println("4. Them hang hoa");
         System.out.println("5. Xoa hang hoa");
         System.out.println("6. Sua hang hoa");
-        System.out.println("7. Hien danh sach hang hoa");
-        System.out.println("8. Luu danh sach hang hoa");
-        System.out.println("9. Thoat");
+        // System.out.println("7. Hien danh sach hang hoa");
+        // System.out.println("8. Luu danh sach hang hoa");
+        System.out.println("7. Thoat");
     }
     public void run(){
         Scanner sc = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class QL_HH {
         ds.docFile();
         do {
             menu();
-            System.out.println("Nhap lua chon: ");
+            System.out.print("Nhap lua chon: ");
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {

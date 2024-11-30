@@ -55,11 +55,13 @@ public class hangHoa {
     public void nhapHangHoa () {
         Scanner sc = new Scanner(System.in);
         DS_HH ds_HH = new DS_HH();
+        ds_HH.docFile();
+        
         while(true){
             System.out.print("Nhap ma hang: ");
             maHang = sc.nextLine();
             ///Nếu mã hàng hóa không tồn tại thì cho nhập
-            if(ds_HH.searchHH(maHang).getMaHang() != "") break;
+            if(ds_HH.searchHH(maHang) == null) break;
 
             ///Nếu mã hàng hóa đã tồn tại thì bắt nhập lại
             System.out.println("Ma hang hoa da ton tai. Hay nhap lai ma hang hoa.");
@@ -73,7 +75,6 @@ public class hangHoa {
         sc.nextLine();
         System.out.print("Nhap noi san xuat: ");
         noiSX = sc.nextLine();
-
     }
     public void nhapHangHoa (String ma) {
         Scanner sc = new Scanner(System.in);
