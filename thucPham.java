@@ -24,8 +24,8 @@ public class thucPham extends hangHoa{
     @Override
     public void xuatHangHoa() {
         super.xuatHangHoa();
-        System.out.println("- Han su dung: " + hanSD);
-        System.out.println("- Thanh tien: " + this.tinhThanhTien());
+        System.out.println("Han su dung: " + hanSD);
+        System.out.println("Thanh tien: " + this.tinhThanhTien());
     }
     @Override
     public void nhapHangHoa() {
@@ -41,7 +41,6 @@ public class thucPham extends hangHoa{
         hanSD = sc.nextInt();   
     }
 }
-
 
 
 // import java.util.Scanner;
@@ -69,11 +68,7 @@ public class thucPham extends hangHoa{
     
 //     @Override
 //     public void xuatHangHoa() {
-//         System.out.println("- Ma thuc phan: " + this.getMaHang());
-//         System.out.println("- Ten thuc pham: " + this.getTenHang());
-//         System.out.println("- So luong: " + this.getSoLuong());
-//         System.out.println("- Gia thuc pham: " + this.getGiaHH());
-//         System.out.println("- Noi san xuat: " + this.getNoiSX());
+//         super.xuatHangHoa();
 //         System.out.println("- Han su dung: " + hanSD);
 //         System.out.println("- Thanh tien: " + this.tinhThanhTien());
 //     }
@@ -84,6 +79,10 @@ public class thucPham extends hangHoa{
 //         System.out.print("Nhap han su dung: ");
 //         hanSD = sc.nextInt();   
 //     }
+//     public void nhapHangHoa(String ma) {
+//         Scanner sc= new Scanner(System.in);
+//         super.nhapHangHoa(ma);
+//         System.out.print("Nhap han su dung: ");
+//         hanSD = sc.nextInt();   
+//     }
 // }
-
-

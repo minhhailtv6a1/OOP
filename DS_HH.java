@@ -36,6 +36,7 @@ public class DS_HH implements danhSach {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong hang hoa: ");
         int count = sc.nextInt();
+        System.out.println("\n==============NHAP HANG HOA==============");
         sc.nextLine();
         for (int i=0; i<count; i++) {
             hangHoa hh;
@@ -47,6 +48,7 @@ public class DS_HH implements danhSach {
                 hh = new thucPham();
             }
             hh.nhapHangHoa();
+            System.out.println();
             ds.add(hh);
             this.ghiFile();
             this.soLuong++;
@@ -56,17 +58,18 @@ public class DS_HH implements danhSach {
 
     @Override
     public void xuat() {
-        System.out.println();
+        System.out.println("\n=========XUAT DANH SACH========");
         // System.out.println(ds.size());
         for (int i=0; i<ds.size(); i++) {
             ds.get(i).xuatHangHoa();
+            System.out.println();
         }
-        System.out.println();
     }
 
     @Override
     public void them() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("\n========THEM HANG HOA========");
         hangHoa hh;
         int loai = chonLoaiHH();
         if (loai == 1){
@@ -91,28 +94,30 @@ public class DS_HH implements danhSach {
         Scanner sc = new Scanner(System.in);
 
         while(true){
+            System.out.println("\n========XOA HANG HOA========");
             System.out.print("Nhap ma hang can xoa: ");
             String maHang = sc.nextLine();
             for (int i = 0; i < soLuong; i++) {
                 if (ds.get(i).getMaHang().equals(maHang)) {
                     ds.remove(i);
                     soLuong--;
+                    this.ghiFile();
                     return;
                 }
             }
-
             System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
         }
-        
     }
     @Override
     public void timKiem() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("\n=========TIM KIEM HANG HOA=========");
         while(true){
             System.out.print("Nhap ma hang can tim: ");
             String maHang = sc.nextLine();
             hangHoa hh = searchHH(maHang);
             if (hh != null) {
+                System.out.println();
                 hh.xuatHangHoa();
                 break;
             }
@@ -212,6 +217,7 @@ public class DS_HH implements danhSach {
             noiThat tmp = (noiThat) hh;
             int choice;
             do {
+                System.out.println("\n========SUA HANG HOA========");
                 System.out.println("1. Sua ma hang");
                 System.out.println("2. Sua ten hang");
                 System.out.println("3. Sua so luong");
@@ -252,6 +258,13 @@ public class DS_HH implements danhSach {
                         break;
 
                 }
+                this.ghiFile();
+                if (choice != 8) {
+                    System.out.println("\nBan muon tiep tuc sua khong? \n1.Tiep tuc\n2.Thoat");
+                    System.out.print("Nhap lua chon: ");
+                    if (sc.nextInt() == 2)
+                        break;
+                }
             } while (choice != 8);
             
         }
@@ -259,12 +272,14 @@ public class DS_HH implements danhSach {
             thucPham tmp = (thucPham) hh;
             int choice;
             do {
+                System.out.println("\n========SUA HANG HOA========");
                 System.out.println("1. Sua ma hang");
                 System.out.println("2. Sua ten hang");
                 System.out.println("3. Sua so luong");
                 System.out.println("4. Sua gia hang");
                 System.out.println("5. Sua noi san xuat");
                 System.out.println("6. Sua han su dung");
+                System.out.println("7: Thoat");
                 System.out.print("Nhap lua chon: ");
                 choice = sc.nextInt();
                 switch (choice) {
@@ -292,6 +307,13 @@ public class DS_HH implements danhSach {
                     default: 
                         System.out.println("Nhap sai, vui long nhap lai");
                         break;   
+                }
+                this.ghiFile();
+                if (choice != 7) {
+                    System.out.println("\nBan muon tiep tuc sua khong? \n1.Tiep tuc\n2.Thoat");
+                    System.out.print("Nhap lua chon: ");
+                    if (sc.nextInt() == 2)
+                        break;
                 }
             } while(choice != 7);
         }
@@ -348,7 +370,6 @@ public class DS_HH implements danhSach {
     
 }
 
-
 // import java.util.Scanner;
 // import java.util.ArrayList;
 // import java.io.BufferedReader;
@@ -373,17 +394,21 @@ public class DS_HH implements danhSach {
 //             System.out.println("3. Thoat");
 //             System.out.print("Nhap loai hang hoa: ");
 //             loai = sc.nextInt();
+//             sc.nextLine();
 //             while (loai < 1|| loai > 3) {
 //                 System.out.println("Nhap sai, vui long nhap lai");
 //                 loai = sc.nextInt();
+//                 sc.nextLine();
 //             }
 //         return loai;
 //     }
 
+//     @Override
 //     public void nhap() {
 //         Scanner sc = new Scanner(System.in);
 //         System.out.print("Nhap so luong hang hoa: ");
 //         int count = sc.nextInt();
+//         sc.nextLine();
 //         for (int i=0; i<count; i++) {
 //             hangHoa hh;
 //             int loai = chonLoaiHH();
@@ -394,18 +419,24 @@ public class DS_HH implements danhSach {
 //                 hh = new thucPham();
 //             }
 //             hh.nhapHangHoa();
-//             hh.xuatHangHoa();
 //             ds.add(hh);
+//             this.ghiFile();
+//             this.soLuong++;
 //         }
-//         soLuong += count;
-//         System.out.println(ds.size());
+//         // soLuong += count;
 //     }
+
+//     @Override
 //     public void xuat() {
+//         System.out.println();
+//         // System.out.println(ds.size());
 //         for (int i=0; i<ds.size(); i++) {
 //             ds.get(i).xuatHangHoa();
 //         }
 //         System.out.println();
 //     }
+
+//     @Override
 //     public void them() {
 //         Scanner sc = new Scanner(System.in);
 //         hangHoa hh;
@@ -419,38 +450,49 @@ public class DS_HH implements danhSach {
 //         hh.nhapHangHoa();
 //         ds.add(hh);
 //         soLuong++;
+//         this.ghiFile();
 //     }
 
-//     ////// Them co parameter
-//     public void them(hangHoa hh) {
+//     public void them (hangHoa hh) {
 //         ds.add(hh);
-//         this.soLuong++;
+//         soLuong++;
+//         this.ghiFile();
 //     }
 
-//     public void xoa() {
+//     public void xoa () {
 //         Scanner sc = new Scanner(System.in);
-//         System.out.print("Nhap ma hang can xoa: ");
-//         String maHang = sc.nextLine();
-//         for (int i = 0; i < soLuong; i++) {
-//             if (ds.get(i).getMaHang().equals(maHang)) {
-//                 ds.remove(i);
-//                 soLuong--;
-//                 return;
+
+//         while(true){
+//             System.out.print("Nhap ma hang can xoa: ");
+//             String maHang = sc.nextLine();
+//             for (int i = 0; i < soLuong; i++) {
+//                 if (ds.get(i).getMaHang().equals(maHang)) {
+//                     ds.remove(i);
+//                     soLuong--;
+//                     return;
+//                 }
 //             }
+
+//             System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
 //         }
-//         System.out.println("Khong tim thay hang co ma: " + maHang);
+        
 //     }
-
-//     public void timKiem(){
-
-//     }
-
-//     public hangHoa searchHH () {
+//     @Override
+//     public void timKiem() {
 //         Scanner sc = new Scanner(System.in);
-//         System.out.print("Nhap ma hang can tim: ");
-//         String maHang = sc.nextLine();
-//         return searchHH(maHang);
+//         while(true){
+//             System.out.print("Nhap ma hang can tim: ");
+//             String maHang = sc.nextLine();
+//             hangHoa hh = searchHH(maHang);
+//             if (hh != null) {
+//                 hh.xuatHangHoa();
+//                 break;
+//             }
+
+//             System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
+//         }        
 //     }
+
 //     public hangHoa searchHH (String maHang) {
 //         for (int i = 0; i < soLuong; i++) {
 //             if (ds.get(i).getMaHang().equals(maHang)) {
@@ -462,9 +504,17 @@ public class DS_HH implements danhSach {
 
 //     public void suaMaHang(hangHoa hh){
 //         Scanner sc = new Scanner(System.in);
-//         System.out.print("Nhap ma moi: ");
-//         String ma = sc.nextLine();
-//         hh.setMaHang(ma);
+//         while(true){
+//             System.out.print("Nhap ma moi: ");
+//             String ma = sc.nextLine();
+//             if(this.searchHH(ma) == null){
+//                 hh.setMaHang(ma);
+//                 break;
+//             }
+
+//             System.out.println("Ma hoa don da ton tai. Hay nhap lai ma hoa don.");
+//         }
+
 //     }
 
 //     public void suaTenHang(hangHoa hh) {
@@ -517,11 +567,19 @@ public class DS_HH implements danhSach {
 //         hh.setTinhTrang(tinhTrang);
 //     }
 
+//     @Override
 //     public void sua() {
 //         Scanner sc = new Scanner (System.in);
-//         System.out.print( "Nhap ma hang can sua: ");
-//         String maHang = sc.nextLine();
-//         hangHoa hh = searchHH(maHang);
+//         hangHoa hh;
+//         while(true){
+//             System.out.print("Nhap ma hang can tim: ");
+//             String maHang = sc.nextLine();
+//             hh = searchHH(maHang);
+//             if (hh != null) break;
+
+//             System.out.println("Khong ton tai ma hang hoa. Hay nhap lai ma hang hoa.");
+//         }        
+
 //         if (hh instanceof noiThat) {
 //             noiThat tmp = (noiThat) hh;
 //             int choice;
@@ -609,12 +667,9 @@ public class DS_HH implements danhSach {
 //                 }
 //             } while(choice != 7);
 //         }
-//         else {
-//             System.out.println("Khong tim thay hang co ma: " + maHang);
-//         }
-        
-
 //     }
+
+//     @Override
 //     public void docFile() {
 //         try {
 //             BufferedReader input = new BufferedReader (new FileReader("DS_HH.txt"));
@@ -623,7 +678,7 @@ public class DS_HH implements danhSach {
 //             while(line != null) {
 //                 String []cur = line.split(",");
 //                 hangHoa tmp;
-//                 if (cur[0] == "1") {
+//                 if (cur[0].equals("1")) {
 //                     tmp = new noiThat(cur[1], cur[2], Integer.parseInt(cur[3]), Double.parseDouble(cur[4])
 //                     , cur[5], Integer.parseInt(cur[6]), cur[7]);
 //                 }
@@ -642,6 +697,7 @@ public class DS_HH implements danhSach {
 //         }
         
 //     }
+//     @Override
 //     public void ghiFile() {
 //         try {
 //             FileWriter output = new FileWriter("DS_HH.txt");
@@ -661,4 +717,5 @@ public class DS_HH implements danhSach {
 //             e.printStackTrace();
 //         }
 //     }
+    
 // }

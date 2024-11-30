@@ -187,7 +187,15 @@ public class DS_HD implements danhSach {
                     line += tmp.getKh().getMaKhach() + ",";
                     line += tmp.getNv().getMaNhanVien();
                     for(chiTietSP j : tmp.getDs_sp()){
-                        line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
+
+                        // line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
+
+                        if(j.getSP() instanceof doAn){
+                            line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() ;
+                        }
+                        else if(j.getSP() instanceof thucUong){
+                            line+= "," + j.getSP().getMaSP() + "," + j.getSoLuong() + "," + j.getSize() + "," + j.getLuongDa() + "," + j.getNongDoDuong();
+                        }
                     }
                     line +="\n";
                 }
@@ -243,16 +251,31 @@ public class DS_HD implements danhSach {
                 ds_SP.docFile();
                 
 
-                ///Lấy chi tiết sp vừa đọc add là ArrayList chiTietSPs
+
                 ArrayList<chiTietSP> chiTietSPs = new ArrayList<>();
-                for(int i=6;i<arr.length; i = i + 2){
+                for(int i=6;i<arr.length;){
                     //Cho setSP = SP ma tim duoc trong ds_SP bang ma
                     ///Chi tiết SP để đọc từ file lên
                     chiTietSP sp1=new chiTietSP();
                     sp1.setSP(ds_SP.timMa(arr[i]));
                     sp1.setSoLuong(Integer.parseInt(arr[i+1]));
+
+
+                    ///Nếu sp là nước thì đọc thêm size, đá, đường
+                    if(sp1.getSP() instanceof thucUong){
+                        sp1.setSize(arr[i+2]);
+                        sp1.setLuongDa(Float.parseFloat(arr[i+3]));
+                        sp1.setNongDoDuong(Float.parseFloat(arr[i+4]));
+                        i = i + 5;
+                    }
+                    else {
+                        i = i + 2;
+                    }
+
+                    ///Lấy chi tiết sp vừa đọc add là ArrayList chiTietSPs
                     chiTietSPs.add(sp1);
                 }
+
                 ///Set ds_sp của hóa đơn tmp = ArrayList chiTietSPs
                 tmp.setDs_sp(chiTietSPs);
                 

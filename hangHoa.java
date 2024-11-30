@@ -55,11 +55,13 @@ public class hangHoa {
     public void nhapHangHoa () {
         Scanner sc = new Scanner(System.in);
         DS_HH ds_HH = new DS_HH();
+        ds_HH.docFile();
+        
         while(true){
             System.out.print("Nhap ma hang: ");
             maHang = sc.nextLine();
             ///Nếu mã hàng hóa không tồn tại thì cho nhập
-            if(ds_HH.searchHH(maHang).getMaHang() != "") break;
+            if(ds_HH.searchHH(maHang) == null) break;
 
             ///Nếu mã hàng hóa đã tồn tại thì bắt nhập lại
             System.out.println("Ma hang hoa da ton tai. Hay nhap lai ma hang hoa.");
@@ -73,7 +75,6 @@ public class hangHoa {
         sc.nextLine();
         System.out.print("Nhap noi san xuat: ");
         noiSX = sc.nextLine();
-
     }
     public void nhapHangHoa (String ma) {
         Scanner sc = new Scanner(System.in);
@@ -101,11 +102,8 @@ public class hangHoa {
     }
 }
 
-
-
-
 // import java.util.Scanner;
-// public abstract class hangHoa {
+// public class hangHoa {
 //     private String maHang;
 //     private String tenHang;
 //     private double giaHH;
@@ -119,6 +117,7 @@ public class hangHoa {
 //         this.soLuong = 0;
 //         this.noiSX = "";
 //     }
+
 //     public hangHoa (String maHang, String tenHang, int soLuong, double giaHH, String noiSX) {
 //         this.maHang = maHang;
 //         this.tenHang = tenHang;
@@ -159,8 +158,16 @@ public class hangHoa {
 //     }
 //     public void nhapHangHoa () {
 //         Scanner sc = new Scanner(System.in);
-//         System.out.print("Nhap ma hang: ");
-//         maHang = sc.nextLine();
+//         DS_HH ds_HH = new DS_HH();
+//         while(true){
+//             System.out.print("Nhap ma hang: ");
+//             maHang = sc.nextLine();
+//             ///Nếu mã hàng hóa không tồn tại thì cho nhập
+//             if(ds_HH.searchHH(maHang).getMaHang() != "") break;
+
+//             ///Nếu mã hàng hóa đã tồn tại thì bắt nhập lại
+//             System.out.println("Ma hang hoa da ton tai. Hay nhap lai ma hang hoa.");
+//         }
 //         System.out.print("Nhap ten hang: ");
 //         tenHang = sc.nextLine();
 //         System.out.print("Nhap so luong: ");
@@ -172,7 +179,27 @@ public class hangHoa {
 //         noiSX = sc.nextLine();
 
 //     }
-//     public abstract void xuatHangHoa();
+//     public void nhapHangHoa (String ma) {
+//         Scanner sc = new Scanner(System.in);
+//         this.maHang = ma;
+//         System.out.print("Nhap ten hang: ");
+//         tenHang = sc.nextLine();
+//         System.out.print("Nhap so luong: ");
+//         soLuong = sc.nextInt();
+//         System.out.print("Nhap gia hang hoa: ");
+//         giaHH = sc.nextInt();
+//         sc.nextLine();
+//         System.out.print("Nhap noi san xuat: ");
+//         noiSX = sc.nextLine();
+
+//     }
+//     public void xuatHangHoa() {
+//         System.out.println("Ma hang: " + maHang);
+//         System.out.println("Ten hang: " + tenHang);
+//         System.out.println("So luong: " + soLuong);
+//         System.out.println("Gia hang hoa: " + giaHH);
+//         System.out.println("Noi san xuat: " + noiSX);
+//     }
 //     public double tinhThanhTien() {
 //         return soLuong * giaHH;
 //     }

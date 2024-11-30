@@ -8,4 +8,4 @@ nv07,meomeo,2000,nu,0111123654,lao cong,1,8,23000
 nv08,lakaka,2001,nam,0111222333,pha che,2,5,25000
 nv09,anh long,1995,nam,0999999999,quan li,1,8,65000
 nv00,bao bao,1995,nam,0159487245,lao cong,2,6,25000
-nv10,a loi,20001,nu,0125463254,dau bep,1,8,30000
+nv10,lababa,20001,nu,0125463254,dau bep,1,8,90000

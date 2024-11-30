@@ -156,97 +156,102 @@ public class DS_NV implements danhSach{
             System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien.");
         }
         
+        while(true){
+            Scanner sc = new Scanner(System.in);
+            int chon;
+            System.out.println("\tSUA THONG TIN NHAN VIEN");
+            System.out.println("1. Sua ma nhan vien ");
+            System.out.println("2. Sua ten nhan vien ");
+            System.out.println("3. Sua nam sinh ");
+            System.out.println("4. Sua gioi tinh ");
+            System.out.println("5. Sua so dien thoai ");
+            System.out.println("6. Sua vi tri ");
+            System.out.println("7. Sua ca lam ");
+            System.out.println("8. Sua so gio ");
+            System.out.println("9. Sua luong co ban ");
+            System.out.println("10. Sua tat ca ");
+            System.out.println("11. Thoat ");
+            System.out.print("Hay chon thong tin sua: ");
+            chon = sc.nextInt();
+            sc.nextLine();
+            switch(chon){
+                case 1: {
+                    // DS_NV ds_NV = new DS_NV();
+                    // ds_NV.docFile();
+                    String ma;
+                    while(true){
+                        System.out.print("Nhap ma nhan vien: ");
+                        ma = sc.nextLine();
+                        if(timMa(ma).getMaNhanVien() == "") break;
 
-        Scanner sc = new Scanner(System.in);
-        int chon;
-        System.out.println("\tSUA THONG TIN NHAN VIEN");
-        System.out.println("1. Sua ma nhan vien ");
-        System.out.println("2. Sua ten nhan vien ");
-        System.out.println("3. Sua nam sinh ");
-        System.out.println("4. Sua gioi tinh ");
-        System.out.println("5. Sua so dien thoai ");
-        System.out.println("6. Sua vi tri ");
-        System.out.println("7. Sua ca lam ");
-        System.out.println("8. Sua so gio ");
-        System.out.println("9. Sua luong co ban ");
-        System.out.println("10. Sua tat ca ");
-        System.out.println("11. Thoat ");
-        System.out.print("Hay chon thong tin sua: ");
-        chon = sc.nextInt();
-        sc.nextLine();
-        switch(chon){
-            case 1: {
-                // DS_NV ds_NV = new DS_NV();
-                // ds_NV.docFile();
-                String ma;
-                while(true){
-                    System.out.print("Nhap ma nhan vien: ");
-                    ma = sc.nextLine();
-                    if(timMa(ma).getMaNhanVien() == "") break;
+                        System.out.println("Ma nhan vien da ton tai. Hay nhap lai ma nhan vien.");
+                    }
+                    nv.get(nv.indexOf(tmp)).setMaNhanVien(ma);
+                } break;
 
-                    System.out.println("Ma nhan vien da ton tai. Hay nhap lai ma nhan vien.");
-                }
-                nv.get(nv.indexOf(tmp)).setMaNhanVien(ma);
-            } break;
+                case 2: {
+                    System.out.print("Nhap ten nhan vien: ");
+                    String tenkh= sc.nextLine();
+                    nv.get(nv.indexOf(tmp)).setHoTen(tenkh);
+                } break;
 
-            case 2: {
-                System.out.print("Nhap ten nhan vien: ");
-                String tenkh= sc.nextLine();
-                nv.get(nv.indexOf(tmp)).setHoTen(tenkh);
-            } break;
+                case 3: {
+                    System.out.println("Nhap nam sinh: ");
+                    int namSinh= Integer.parseInt(sc.nextLine());
+                    nv.get(nv.indexOf(tmp)).setNamSinh(namSinh);
+                } break;
 
-            case 3: {
-                System.out.println("Nhap nam sinh: ");
-                int namSinh= Integer.parseInt(sc.nextLine());
-                nv.get(nv.indexOf(tmp)).setNamSinh(namSinh);
-            } break;
+                case 4: {
+                    System.out.println("Nhap gioi tinh: ");
+                    String gioiTinh= sc.nextLine();
+                    nv.get(nv.indexOf(tmp)).setGioiTinh(gioiTinh);
+                } break;
 
-            case 4: {
-                System.out.println("Nhap gioi tinh: ");
-                String gioiTinh= sc.nextLine();
-                nv.get(nv.indexOf(tmp)).setGioiTinh(gioiTinh);
-            } break;
+                case 5: {
+                    System.out.println("Nhap so dien thoai: ");
+                    String sdt= sc.nextLine();
+                    nv.get(nv.indexOf(tmp)).setSoDienThoai(sdt);
+                } break;
 
-            case 5: {
-                System.out.println("Nhap so dien thoai: ");
-                String sdt= sc.nextLine();
-                nv.get(nv.indexOf(tmp)).setSoDienThoai(sdt);
-            } break;
+                case 6: {
+                    System.out.println("Nhap vi tri: ");
+                    String viTri= sc.nextLine();
+                    nv.get(nv.indexOf(tmp)).setViTri(viTri);
+                } break;
 
-            case 6: {
-                System.out.println("Nhap vi tri: ");
-                String viTri= sc.nextLine();
-                nv.get(nv.indexOf(tmp)).setViTri(viTri);
-            } break;
+                case 7: {
+                    System.out.println("Nhap ca lam: ");
+                    int caLam= Integer.parseInt(sc.nextLine());
+                    nv.get(nv.indexOf(tmp)).setCaLam(caLam);
+                } break;
 
-            case 7: {
-                System.out.println("Nhap ca lam: ");
-                int caLam= Integer.parseInt(sc.nextLine());
-                nv.get(nv.indexOf(tmp)).setCaLam(caLam);
+                case 8: {
+                    System.out.println("Nhap so gio: ");
+                    int soGio= Integer.parseInt(sc.nextLine());
+                    nv.get(nv.indexOf(tmp)).setSoGio(soGio);
+                } break;
+
+                case 9: {
+                    System.out.println("Nhap luong co ban: ");
+                    double luongCB= Integer.parseInt(sc.nextLine());
+                    nv.get(nv.indexOf(tmp)).setLuongCoBan(luongCB);
+                } break;
+
+                case 10: {
+                    nv.get(nv.indexOf(tmp)).nhap();
+                } break;
+
+                case 11:
+                    break;
+
+                default:  System.out.println("Chon sai chuc nang!");
+                    break;
             }
+            this.ghiFile();
+            if(chon >= 1 && chon <= 11) break;
 
-            case 8: {
-                System.out.println("Nhap so gio: ");
-                int soGio= Integer.parseInt(sc.nextLine());
-                nv.get(nv.indexOf(tmp)).setSoGio(soGio);
-            }
-
-            case 9: {
-                System.out.println("Nhap luong co ban: ");
-                double luongCB= Integer.parseInt(sc.nextLine());
-                nv.get(nv.indexOf(tmp)).setLuongCoBan(luongCB);
-            }
-            case 10: {
-                nv.get(nv.indexOf(tmp)).nhap();
-            } break;
-
-            case 11:
-                break;
-
-            default:  System.out.println("Chon sai chuc nang!");
-                break;
+            System.out.println("Chon sai chuc nang. Hay nhap lai.");
         }
-        this.ghiFile();
     }
 
     public void ghiFile(){

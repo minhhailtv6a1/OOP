@@ -133,9 +133,17 @@ public class hoaDonKhach extends hoaDon{
         System.out.println("- Ten nhan vien: " + this.getNv().getHoTen());
         System.out.println("- Cac san pham da mua:");
         for(chiTietSP i: ds_sp){
-            System.out.print("+ " + i.getSP().getTenSP());
-            System.out.print(": " + (int)i.getSP().getGiaSP() + "vnd ");///i.;giaSP   
-            System.out.println("x" + i.getSoLuong()); //i.soLuong
+            if(i.getSP() instanceof doAn){
+                System.out.print("+ " + i.getSP().getTenSP());
+                System.out.print(": " + (int)i.getSP().getGiaSP() + "vnd ");///i.;giaSP   
+                System.out.println("x" + i.getSoLuong()); //i.soLuong
+            }
+            else if(i.getSP() instanceof thucUong){
+                System.out.print("+ " + i.getSP().getTenSP());
+                System.out.print(": " + (int)i.getSP().getGiaSP() + "vnd ");///i.;giaSP   
+                System.out.print("x" + i.getSoLuong()); //i.soLuong
+                System.out.println(", size: " + i.getSize() + ", da: " + (int)i.getLuongDa() + "%, duong: " + (int)i.getNongDoDuong() + "%");
+            }
         }
         System.out.println("- Tong hoa don: " + (int)this.tongHoaDon() + "vnd");
     }
