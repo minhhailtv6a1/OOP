@@ -38,9 +38,13 @@ public class chiTietSP {
             System.out.println("Khong ton tai san pham. Hay nhap lai ma san pham!");
         }
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap so luong: ");
-        this.soLuong=sc.nextInt();
-        sc.nextLine();
+        while(true){
+            System.out.print("Nhap so luong: ");
+            this.soLuong = Integer.parseInt(sc.nextLine());
+            if(this.soLuong > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
         if(this.sp instanceof thucUong){
             System.out.print("Chon size (M/L): ");
             this.size = sc.nextLine();

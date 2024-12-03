@@ -18,9 +18,16 @@ public class DS_KH implements danhSach{
 
     public void nhap(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap so luong khach hang: ");
-        int n1 = sc.nextInt();
-        sc.nextLine();
+        int n1;
+
+        while(true){
+            System.out.print("Nhap so luong khach hang: ");
+            n1 = Integer.parseInt(sc.nextLine());
+            if(n1 > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
+
         for(int i=0;i<n1;i++){
             System.out.println("Khach hang: " + ( i + 1 ) );
             khachHang tmp = new khachHang();

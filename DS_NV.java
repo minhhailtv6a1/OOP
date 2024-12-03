@@ -20,9 +20,16 @@ public class DS_NV implements danhSach{
         System.out.println("--------------------------------");
         System.out.println("\tNHAP DANH SACH NHAN VIEN");
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap so luong nhan vien: ");
-        int n1 = sc.nextInt();
-        sc.nextLine();
+        
+        int n1;
+
+        while(true){
+            System.out.print("Nhap so luong nhan vien: ");
+            n1 = Integer.parseInt(sc.nextLine());
+            if(n1 > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
 
         for(int i=0;i<n1;i++){
             System.out.println("Nhan vien: " + ( i + 1 ) );

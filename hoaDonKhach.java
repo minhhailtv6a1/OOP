@@ -151,7 +151,8 @@ public class hoaDonKhach extends hoaDon{
     public double tongHoaDon(){
         double tong=0;
         for(chiTietSP i: ds_sp){
-            tong+=i.getSP().getGiaSP()*i.getSoLuong();//i.hh.getGiaSP()*i.soLuong
+            // tong+=i.getSP().getGiaSP()*i.getSoLuong();//i.hh.getGiaSP()*i.soLuong
+            tong+=i.tinhThanhTien();
         }
         return tong;
     }

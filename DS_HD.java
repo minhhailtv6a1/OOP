@@ -41,9 +41,17 @@ public class DS_HD implements danhSach {
         System.out.println("--------------------------------");
         System.out.println("\tNHAP DANH SACH HOA DON");
         Scanner sc=new Scanner(System.in);
-        System.out.print("Nhap so luong hoa don: ");
-        int n1=sc.nextInt();
-        sc.nextLine();
+
+        int n1;
+
+        while(true){
+            System.out.print("Nhap so luong hoa don: ");
+            n1 = Integer.parseInt(sc.nextLine());
+            if(n1 > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
+        
         // int select = chonHoaDon();
         for(int i=0;i<n1;i++){
             int select = chonHoaDon();

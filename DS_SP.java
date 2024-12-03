@@ -59,8 +59,16 @@ public class DS_SP implements danhSach{
     // Nhập nhiều sản phẩm
     public void nhap() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap so luong san pham muon them: ");
-        int soLuong = Integer.parseInt(sc.nextLine()); // Đọc số lượng sản phẩm từ người dùng
+
+        int soLuong; 
+
+        while(true){
+            System.out.print("Nhap so luong san pham muon them: ");
+            soLuong = Integer.parseInt(sc.nextLine()); // Đọc số lượng sản phẩm từ người dùng
+            if(soLuong > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
 
         for (int i = 0; i < soLuong; i++) {
             sanPham sp;

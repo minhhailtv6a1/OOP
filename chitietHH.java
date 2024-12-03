@@ -44,8 +44,13 @@ public class chitietHH  {
         }
         else {
             hh = ds.searchHH(ma);
-            System.out.print ("Nhap so luong nhap: ");
-            soLuong = sc.nextInt();
+            while(true){
+                System.out.print ("Nhap so luong nhap: ");
+                this.soLuong = Integer.parseInt(sc.nextLine());
+                if(this.soLuong > 0) break;
+    
+                System.out.println("So luong phai lon hon 0");
+            }
             hh.setSoLuong(hh.getSoLuong() + soLuong);
         }
 

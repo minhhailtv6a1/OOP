@@ -68,8 +68,15 @@ public class hangHoa {
         }
         System.out.print("Nhap ten hang: ");
         tenHang = sc.nextLine();
-        System.out.print("Nhap so luong: ");
-        soLuong = sc.nextInt();
+
+        while(true){
+            System.out.print("Nhap so luong: ");
+            this.soLuong = Integer.parseInt(sc.nextLine());
+            if(this.soLuong > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
+        
         System.out.print("Nhap gia hang hoa: ");
         giaHH = sc.nextInt();
         sc.nextLine();
@@ -81,8 +88,15 @@ public class hangHoa {
         this.maHang = ma;
         System.out.print("Nhap ten hang: ");
         tenHang = sc.nextLine();
-        System.out.print("Nhap so luong: ");
-        soLuong = sc.nextInt();
+        
+        while(true){
+            System.out.print("Nhap so luong: ");
+            this.soLuong = Integer.parseInt(sc.nextLine());
+            if(this.soLuong > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
+        
         System.out.print("Nhap gia hang hoa: ");
         giaHH = sc.nextInt();
         sc.nextLine();

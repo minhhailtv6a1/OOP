@@ -34,8 +34,17 @@ public class DS_HH implements danhSach {
     @Override
     public void nhap() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap so luong hang hoa: ");
-        int count = sc.nextInt();
+        
+        int count;
+
+        while(true){
+            System.out.print("Nhap so luong hang hoa: ");
+            count = Integer.parseInt(sc.nextLine());
+            if(count > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
+
         System.out.println("\n==============NHAP HANG HOA==============");
         sc.nextLine();
         for (int i=0; i<count; i++) {
