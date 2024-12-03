@@ -24,7 +24,7 @@ public class thucPham extends hangHoa{
     @Override
     public void xuatHangHoa() {
         super.xuatHangHoa();
-        System.out.println("Han su dung: " + hanSD);
+        System.out.println("Han su dung: " + hanSD + " thang");
         System.out.println("Thanh tien: " + this.tinhThanhTien());
     }
     @Override

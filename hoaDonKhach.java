@@ -114,9 +114,13 @@ public class hoaDonKhach extends hoaDon{
             System.out.println("Khong ton tai nhan vien. Hay nhap lai ma nhan vien!");
         }
 
-        System.out.print("Nhap so luong cac san pham: ");
-        n=sc.nextInt();
-        sc.nextLine();
+        while(true){
+            System.out.print("Nhap so luong cac san pham: ");
+            this.n = Integer.parseInt(sc.nextLine());
+            if(this.n > 0) break;
+
+            System.out.println("So luong phai lon hon 0");
+        }
 
         for(int i=0;i<n;i++){
             chiTietSP tmp=new chiTietSP();

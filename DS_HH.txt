@@ -1,4 +1,4 @@
-1,nt01,ghe,26,10000.0,abc,6,on
+1,nt01,hhhhhhhhhhhhhhhhhhhhh,26,10000.0,abc,6,on
 2,tp01,sua TH true milk,27,15000.0,jkl,3
 1,nt02,ly,10,10000.0,oop,0,2 cai bi me
 2,tp02,banh,18,7000.0,web,1
@@ -11,3 +11,4 @@
 1,nt11,may pha cf,6,100000.0,but,24,moi
 1,nt12,ghe da,2,20000.0,ert,0,moi
 2,tp04,suon heo,10,500000.0,ahf,10
+1,nt04,quat treo tuong,5,250000.0,ads,5,moi

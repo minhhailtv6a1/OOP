@@ -46,7 +46,6 @@ public class DS_HH implements danhSach {
         }
 
         System.out.println("\n==============NHAP HANG HOA==============");
-        sc.nextLine();
         for (int i=0; i<count; i++) {
             hangHoa hh;
             int loai = chonLoaiHH();

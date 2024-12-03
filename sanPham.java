@@ -40,7 +40,7 @@ import java.util.Scanner;
     public void xuat(){
         System.out.println("Ma san pham: " + this.maSP);
         System.out.println("Ten san pham: " + this.tenSP);
-        System.out.println("Gia san pham: " + this.giaSP);
+        System.out.println("Gia san pham: " + this.giaSP + "vnd");
     }
 
     public void setGiaSP(double giaSP) {

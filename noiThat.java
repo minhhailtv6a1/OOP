@@ -48,6 +48,7 @@ public class noiThat extends hangHoa {
         super.xuatHangHoa();
         System.out.println("Thanh tien: " + this.tinhThanhTien());
         System.out.println("Tinh trang: " + tinhTrang);
+        System.out.println("Bao hanh: " + this.hanBH + " thang");
 
     }
     

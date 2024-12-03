@@ -20,11 +20,11 @@ public class thucUong extends sanPham {
     public void nhap() {
         Scanner sc = new Scanner(System.in);
         super.nhap();
-        System.out.print("Nhap size: ");
+        System.out.print("Nhap size(M/L): ");
         this.size = sc.nextLine();
-        System.out.print("Nhap luong da: ");
+        System.out.print("Nhap luong da(0-100): ");
         this.luongDa = Float.parseFloat(sc.nextLine());
-        System.out.print("Nhap nong do duong: ");
+        System.out.print("Nhap nong do duong(0-100): ");
         this.nongDoDuong = Float.parseFloat(sc.nextLine());
     }
 
@@ -32,8 +32,8 @@ public class thucUong extends sanPham {
     public void xuat() {
         super.xuat();
         System.out.println("Size: " + this.size);
-        System.out.println("Luong da: " + this.luongDa);
-        System.out.println("Nong do duong: " + this.nongDoDuong);
+        System.out.println("Luong da: " + this.luongDa + "%");
+        System.out.println("Nong do duong: " + this.nongDoDuong + "%");
     }
 
     public void setLuongDa(float luongDa) {

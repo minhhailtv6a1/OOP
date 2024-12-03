@@ -7,3 +7,6 @@ MX01,My xao bo,40000.0,mi - bo,mon kho
 BM02,Banh mi op la,15000.0,banh mi - trung,mon kho
 CF02,Ca phe da,15000.0,M,70.0,30.0
 CS01,Com suon cha,25000.0,com - suon heo - cha,mon kho
+CS02,com suon op la,30000.0,com - suon heo - trung,mon kho
+MCL01,matcha latte,35000.0,M,50.0,100.0
+ST02,sinh to dau,20000.0,L,50.0,50.0
